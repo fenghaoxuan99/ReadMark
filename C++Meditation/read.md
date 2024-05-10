@@ -8,7 +8,7 @@ located at the beginning of the block; the address actually returned to the call
 points to the location just past this length value, as shown in Figure 7-1.
 </br> 
 
-![example](..\\Image\\v2-33cf02c317b808f22297e00fa445aa9a_720w.png)
+![example](../Image/v2-33cf02c317b808f22297e00fa445aa9a_720w.png)
 
 <p>这里讲的就是在malloc返回的申请内存的首地址之前，用额外的字节存储了长度。
 
