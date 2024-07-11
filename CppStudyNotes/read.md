@@ -16,7 +16,7 @@ points to the location just past this length value, as shown in Figure 7-1.
 
 比如你用malloc申请了20个字节的内存，malloc返回指针p。你想用p+5传入free()，来释放掉后面15个字节内存，抱歉做不到，可能会出现段错误。因为该指针指向的位置前面的内存中的值，会被free视为之前申请的内存的大小。</p>
 
-<p>堆内存可以不free。 但是操作系统也不是 挨个替你调用free函数。
+<p class="ex" >堆内存可以不free。 但是操作系统也不是 挨个替你调用free函数。
 
 操作系统按page管理内存。
 
@@ -65,4 +65,21 @@ malloc(0)的问题
 </blockquote>
 <hr>
 
+<style>
+body {
+	background-color:;
+}
+h1 {
+	color:orange;
+	text-align:center;
+}
+.center {
+    text-align: center;
+    border: 3px solid green;
+}
+p.ex {
+	font-family:"Times New Roman";
+	font-size:20px;
+}
+</style>
 
