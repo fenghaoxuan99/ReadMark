@@ -79,34 +79,12 @@ print(json_string)
 
 # 将JSON字符串写入文件
 with open('data.json', 'w') as json_file:
-    json.dump(data, json_file,indent=4) // 缩进为4个空格
+    json.dump(data, json_file, indent=4) // 缩进为4个空格
 
 # 从文件读取JSON字符串并解析
 with open('data.json', 'r') as json_file:
     parsed_data = json.load(json_file)
     print(parsed_data['name'])  # 输出: Jane Doe
-```
-
-## 简单例子2
-```py
-import json
-jsondata={"version": "23231cimesfedkk","result": {"pages": 1314,"data": [{"name": "大明","IDcard": "440588190001015688","address": "广东省广州市天河区正佳广场99楼520号",},{"name": "二明","IDcard": "440588190012317456","address": "广东省广州市天河区天环广场88楼520号",}]}}
-if __name__ == '__main__':
-    # 若传入的数据为str类型需要将它转成dict类型
-    # result = json.loads(jsondata)
-    jsondata = jsondata["result"]["data"]
-    resultdata = jsondata
-    namelist=[]
-    idcardlist=[]
-    addresslist=[]
-    for data in resultdata:
-        namelist.append(data['name'])
-        idcardlist.append(data['IDcard'])
-        addresslist.append(data['address'])
-    print(namelist)
-    print(idcardlist)
-    print(addresslist)
-
 ```
 
 ## 将自定义Python对象转换为JSON对象

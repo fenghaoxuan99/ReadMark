@@ -338,7 +338,6 @@ path = os.sep.join(['home', 'user', 'file.txt'])
 # 使用os.pathsep来分割环境变量
 path_list = os.environ['PATH'].split(os.pathsep)
 ```
-
 在编写跨平台的Python代码时，使用`os.sep`和`os.pathsep`可以提高代码的可移植性和健壮性。
 
 

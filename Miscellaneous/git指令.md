@@ -42,11 +42,11 @@
 
 ## Git配置
 git 的配置分为两种：  
-1. 全局配置 ： （系统用户级别，作用范围是登录当前用户权限）
-2. 局部配置 ： （项目级别或者叫仓库级别，仅在当前的本地库有效）
+  1. 全局配置 ： （系统用户级别，作用范围是登录当前用户权限）
+  2. 局部配置 ： （项目级别或者叫仓库级别，仅在当前的本地库有效）
 
 ### Git的全局配置
-```
+```py
 配置用户名:
 git config --global user.name  northcastle
 
@@ -55,12 +55,12 @@ git config --global user.email northcastle@163.com
 ```
 
 ### 查看配置效果
-```
+```py
 git config --list
 ```
 
 ### Git的局部配置
-```
+```py
 设置当前仓库的用户名标识:
 git config user.name northcastle_local
 
@@ -71,19 +71,21 @@ git config user.email northcastle_local@163.com
 ## 本地仓库
 具体的本地仓库提交的流程图如下：
 ![alt text](../Image/repository.png)
+
 ### 查看工作区和暂存区的状态
 ```
 git status
 ```
+
 ###  将文件从暂存区中剔除掉
-```
+```py
 git rm --cached [文件名]
 ```
 
 ## 远程仓库
 ![alt text](../Image/27f73df7c9ce4249bc2a76c9c7bd5e9b.png)
 ### 添加远程仓库
-```
+```py
 git remote add 远程仓库的别名 远程仓库的地址
 
 例如 ：
@@ -102,6 +104,9 @@ git push origin --delete remoteBranchName
 删除多个远程分支
 git push origin --delete feature/branch1 feature/branch2 feature/branch3
 ```
+
+
+**本地推送和拉取的方向都是从左到右。**
 ### 从远程获取代码
 ```
 git pull <远程主机名> <远程分支名>:<本地分支名>
@@ -111,7 +116,6 @@ git pull <远程主机名> <远程分支名>:<本地分支名>
 ```
 git push <远程主机名> <本地分支名>:<远程分支名>
 ```
-
 
 
 ## 分支管理

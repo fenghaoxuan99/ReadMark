@@ -33,6 +33,7 @@ for i in pbar:
     pbar.set_postfix(d_loss=format(d_loss,'.3f'), g_loss=format(g_loss,'.3f'))
     pbar.set_postfix({'loss': '{0:1.5f}'.format(i/100), "x": '{0:1.5f}'.format(i)})  # 输入一个字典，显示实验指标
 ```
+
 ### 手动控制更新：
 ```py
 import time
@@ -55,15 +56,14 @@ for i in bar:
     time.sleep(0.1)
     if not (i % 3):
         tqdm.write("Done task %i" % i)
-# 结果如下
-
+# 结果如下：
 Done task 0
-  0%|                                                                                           | 0/10 [00:10<?, ?it/s]
-  0%|                                                                                           | 0/10 [00:00<?, ?it/s]
- 10%|████████▎                                                                          | 1/10 [00:00<00:01,  8.77it/s]
- 20%|████████████████▌                                                                   | 2/10 [00:00<00:00,  9.22it/s]
-                                   
+  0%|                                           | 0/10 [00:10<?, ?it/s]
+  0%|                                           | 0/10 [00:00<?, ?it/s]
+ 10%|████████▎                                 | 1/10 [00:00<00:01,  8.77it/s]
+ 20%|████████████████▌                                                                                    
 ```
+
 ### 通过set_description和set_postfix方法设置进度条显示信息：
 ```py
 from tqdm import trange
@@ -77,5 +77,4 @@ with trange(10) as t:
     #设置进度条右边显示的信息
     t.set_postfix(loss=random(),gen=randint(1,999),str="h",lst=[1,2])
     time.sleep(0.1)
-
 ```

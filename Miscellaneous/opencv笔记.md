@@ -252,7 +252,7 @@ cv2.destroyAllWindows()
 
 ## 图像平移
 如果想要沿（x，y）方向移动，移动的距离为（tx,ty）可以以下面方式构建移动矩阵。
-![alt text](image1.png)
+![alt text](../image/image1.png)
 可以使用Numpy数组构建矩阵，数据类型是np.float32，然后传给函数cv2.warpAffine()
 函数cv2.warpAffine() 的第三个参数的是输出图像的大小，它的格式
 应该是图像的（宽，高）。应该记住的是图像的宽对应的是列数，高对应的是行数。
@@ -280,11 +280,12 @@ rows,cols = img.shape
 M = cv.getRotationMatrix2D(((cols-1)/2.0,(rows-1)/2.0),90,1)
 dst = cv.warpAffine(img,M,(cols,rows))
 ```
-![alt text](image.png)
+
 
 ## 仿射变换
 在仿射变换中，原图中所有的平行线在结果图像中同样平行。为了创建这个矩阵我们需要从原图像中找到三个点以及他们在输出图像中的位置。
 然后cv2.getAffineTransform 会创建一个2x3 的矩阵，最后这个矩阵会被传给函数cv2.warpAffine。
+![alt text](../Image/image2.png)
 ```py
 img = cv.imread('drawing.png')
 rows,cols,ch = img.shape
