@@ -27,10 +27,6 @@
   - [os.cpu_count](#oscpu_count)
   - [os.system()](#ossystem)
     - [注意事项：](#注意事项)
-  - [subprocess](#subprocess)
-      - [参数说明：](#参数说明)
-      - [为什么使用 PIPE？](#为什么使用-pipe)
-      - [主要区别：](#主要区别)
 
 <!-- /code_chunk_output -->
 
@@ -73,7 +69,7 @@
 OS.walk()通过自顶向下或自底向上遍历目录树生成文件名。对于根在目录top的树中的每个目录(包括top本身)，它会生成一个3元组(dirpath, dirnames, filename)。
 os.walk 的返回值是一个生成器(generator),也就是说我们需要用循环不断的遍历它（不可以直接print），来获得所有的内容。
 
-每次遍历的对象都是返回的是一个三元元组(root,dirs,files)
+**每次遍历的对象都是返回的是一个三元元组(root,dirs,files)**
 
 root  所指的是当前正在遍历的这个文件夹的本身的地址
 dirs  是一个 list ，内容是该文件夹中所有的目录的名字(不包括子目录)
@@ -130,18 +126,18 @@ print("Check if path can be executed:", path4)
 #### 参数：
 path:待修改目录的完整路径。
 flag:采用下列标志值的组合(按位OR)-
-os.UF_NODUMP -不要转储文件。
-os.UF_IMMUTABLE -文件不能被修改(只读)。
-os.UF_APPEND -文件只能被追加到。
-os.UF_OPAQUE -目录是不透明的，通过联合堆栈查看。
-os.UF_NOUNLINK -文件不能被重命名或删除。
+os.UF_NODUMP     -不要转储文件。
+os.UF_IMMUTABLE  -文件不能被修改(只读)。
+os.UF_APPEND     -文件只能被追加到。
+os.UF_OPAQUE     -目录是不透明的，通过联合堆栈查看。
+os.UF_NOUNLINK   -文件不能被重命名或删除。
 os.UF_COMPRESSED -文件被压缩保存
-os.UF_HIDDEN -文件不应该显示在GUI中
-os.SF_ARCHIVED -文件可能被存档。(可设置为超级用户)
-os.SF_IMMUTABLE -文件不能被修改。(可设置为超级用户)
-os.SF_APPEND -文件只能被追加到。(可设置为超级用户)
-os.SF_NOUNLINK -文件不能重命名或删除。(可设置为超级用户)
-os.SF_SNAPSHOT -文件是一个快照文件。(可设置为超级用户)
+os.UF_HIDDEN     -文件不应该显示在GUI中
+os.SF_ARCHIVED   -文件可能被存档。(可设置为超级用户)
+os.SF_IMMUTABLE  -文件不能被修改。(可设置为超级用户)
+os.SF_APPEND     -文件只能被追加到。(可设置为超级用户)
+os.SF_NOUNLINK   -文件不能重命名或删除。(可设置为超级用户)
+os.SF_SNAPSHOT   -文件是一个快照文件。(可设置为超级用户)
 返回:不返回任何值
 
 ## os.chmod()
@@ -311,9 +307,41 @@ print("Current umask:", current_umask)
 
 ## os.linesep()
 描述：当前平台用于分隔（或终止）行的字符串。它可以是单个字符，如 POSIX 上是 '\n'，也可以是多个字符，如 Windows 上是 '\r\n'。在写入以文本模式（默认模式）打开的文件时，请不要使用 os.linesep 作为行终止符，请在所有平台上都使用一个 '\n' 代替。
+
 ## os.pathsep()
 描述：操作系统通常用于分隔搜索路径（如 PATH）中不同部分的字符，如 POSIX 上是 ':'，Windows 上是 ';'。在 os.path 中也可用。
 语法：os.pathsep
+
+
+在Python中，`os`模块提供了许多与操作系统交互的功能，其中包括路径分隔符和路径分隔符的设置。`os.sep`和`os.pathsep`是两个常用的属性，它们分别有不同的含义和应用场景：
+
+1. **`os.sep`**：
+   - 含义：`os.sep`代表文件系统中用于分隔目录的字符。在Unix系统（包括Linux和macOS）中，`os.sep`是`'/'`；在Windows系统中，它是`'\\'`。
+   - 应用：当你需要构建或解析文件路径时，可以使用`os.sep`来确保路径在不同操作系统中都是正确的。例如，你可以使用`os.sep`来连接目录和文件名，以避免硬编码斜杠或反斜杠。
+
+2. **`os.pathsep`**：
+   - 含义：`os.pathsep`是一个字符串，用于分隔文件路径列表。在所有系统中，`os.pathsep`都是`':'`，在Windows系统中，它是一个分号`';'`。
+   - 应用：当你需要处理环境变量，如`PATH`，这些环境变量通常包含多个路径，并且这些路径由系统特定的分隔符分隔。使用`os.pathsep`可以确保你正确地分割或合并这些路径列表。
+
+**区别**：
+- `os.sep`用于路径的目录分隔，而`os.pathsep`用于路径列表的分隔。
+- 在Unix系统中，两者都是`':'`，但在Windows系统中，`os.sep`是`'\\'`，而`os.pathsep`是`';'`。
+
+**示例**：
+
+```python
+import os
+
+# 使用os.sep来构建跨平台的路径
+path = os.sep.join(['home', 'user', 'file.txt'])
+
+# 使用os.pathsep来分割环境变量
+path_list = os.environ['PATH'].split(os.pathsep)
+```
+
+在编写跨平台的Python代码时，使用`os.sep`和`os.pathsep`可以提高代码的可移植性和健壮性。
+
+
 ## os.path.lexists()
 描述：路径存在则返回True，路径损坏也返回True， 不存在，返回 False。
 

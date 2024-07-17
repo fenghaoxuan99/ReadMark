@@ -34,7 +34,7 @@ print(list(clean_strings))  # Output: ['hello', 'world', 'python', 'programming'
 ## 与其他函数结合使用
 ```py
 numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]  
-even_numbers = filter(lambda x: x % 2 == 0, numbers)  
+even_numbers         = filter(lambda x: x % 2 == 0, numbers)  
 squared_even_numbers = map(lambda x: x ** 2, even_numbers)  
 print(list(squared_even_numbers))  # Output: [4, 16, 36, 64]
 ```

@@ -1,6 +1,5 @@
 
 
-
 # CSV文件
 
 ​CSV代表Comma Separated Values。CSV文件是一种纯文本文件，用于存储表格和电子表格信息。内容通常是由文本、数字或日期组成的表格。使用将数据存储在表中的程序可以轻松导入和导出CSV文件。
@@ -25,14 +24,12 @@ with open('person.csv', 'w', encoding='utf-8', newline='') as file_obj:
     # 遍历，将每一行的数据写入csv
     for p in person:
         writer.writerow(p)
-
 ```
 要注意这个newline参数，默认是\n，即换行符，csv文件中每一行的末尾都是\n，所以在写入的时候，会自动加上\n，导致文件中出现空行。
 
 
 ```py
 import csv
-
 # 数据
 person = [('xxx', 18, 193), ('yyy', 18, 182), ('zzz', 19, 185)]
 # 表头
@@ -45,9 +42,10 @@ with open('person.csv', 'w', encoding='utf-8', newline='') as file_obj:
     writer.writerow(header)
     # 3.写入数据(一次性写入多行)
     writer.writerows(person)
-
 ```
 
+
+## 通过创建DictWriter对象写入
 ```py
 import csv
 
@@ -67,7 +65,6 @@ with open('person.csv', 'w', encoding='utf-8', newline='') as file_obj:
     dictWriter.writeheader()
     # 3.写入数据(一次性写入多行)
     dictWriter.writerows(person)
-
 ```
 
 ## 通过reader()读取
@@ -81,7 +78,7 @@ with open('person.csv', 'r', encoding='utf-8') as file_obj:
     for r in reader:
         print(r)
 ```
-
+## 通过DictReader()读取
 ```py
 import csv
 

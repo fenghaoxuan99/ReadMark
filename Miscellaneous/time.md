@@ -1,6 +1,4 @@
 
-
-
 # time模块
 
 tm_year:       年
@@ -66,7 +64,7 @@ time.strftime("%Y-%m-%d %p %H:%M:%S",time.localtime()) #返回当前日期和时
 time.strptime()可以将字符串时间按照一定时间格式解析为时间元组。这里需要着重和time.strftime()进行区分，因为这2个方法的名字只有1个字母不一样。我们可以用一个简单的方法进行区分：time.strftime()中的f代表format，可以记成str format time(字符串格式的时间) ；time.strptime()的p代表parse，可以记为str parse time(字符串解析成时间)。下面是本方法的代码举例：
 
 ```py
->>> time.strptime('2011-09-11 08:40:22',"%Y-%m-%d %H:%M:%S")    
+time.strptime('2011-09-11 08:40:22',"%Y-%m-%d %H:%M:%S")    
 time.struct_time(tm_year=2011, tm_mon=9, tm_mday=11, tm_hour=8, tm_min=40, tm_sec=22, tm_wday=6, tm_yday=254, tm_isdst=-1)
 ```
 

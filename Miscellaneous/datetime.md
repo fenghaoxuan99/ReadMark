@@ -89,7 +89,7 @@ print(dt)  # 2023-05-11 10:30:15
 import datetime
 
 ts1 = datetime.datetime.now()
-ts = datetime.datetime.now().timestamp()
+ts  = datetime.datetime.now().timestamp()
 print(ts1)
 print(ts)
 
