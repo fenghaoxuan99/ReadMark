@@ -45,9 +45,9 @@ logging.basicConfig(level    = logging.DEBUG,
                     filemode = 'w' )
 ```
 ![alt text](../Image/20200229211824788.png)
-- `level`:    设置日志级别，如 DEBUG, INFO, WARNING, ERROR, CRITICAL。
-- `format`:   设置日志的输出格式。
-- `datefmt`:  设置日期时间格式。
+- `level`   : 设置日志级别，如 DEBUG, INFO, WARNING, ERROR, CRITICAL。
+- `format`  : 设置日志的输出格式。
+- `datefmt` : 设置日期时间格式。
 - `filename`: 设置日志输出到文件的文件名。
 - `filemode`: 设置文件打开模式，'w' 表示写模式，'a' 表示追加模式。
 
@@ -66,10 +66,10 @@ logging.critical("这是一个 critical 级别的日志")
 
 |组件	|说明|
 |:--:|:--:|
-|Loggers（日志记录器）	|提供程序直接使用的接口（基操中的logging.basicConfig()就是配置了此组件）|
-|Handlers（日志处理器）	|将记录的日志发送到指定的位置（终端打印/保存为文件）|
-|Filters（日志过滤器）	|用于过滤特定的日志记录|
-|Formatters（日志格式器）|	用于控制日志信息的输出格式|
+|Loggers（日志记录器）	 |提供程序直接使用的接口（基操中的logging.basicConfig()就是配置了此组件）|
+|Handlers（日志处理器）	 |将记录的日志发送到指定的位置（终端打印/保存为文件）|
+|Filters（日志过滤器）	 |用于过滤特定的日志记录|
+|Formatters（日志格式器）|用于控制日志信息的输出格式|
 ![alt text](../Image/e083e6407cd84c8e872221e8ebc36e58.png)
 可以创建自己的日志记录器，以便在不同的模块中使用。
 
