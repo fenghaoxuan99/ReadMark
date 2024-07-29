@@ -11,12 +11,6 @@ realloc：函数原型 void*realloc(void * mem_address, unsigned int newsize); �
 
 
 
-
-
-
-
-
-
 # new的用法
 1. new( ) 分配这种类型的一个大小的内存空间,并以括号中的值来初始化这个变量;
 2. new[ ] 分配这种类型的n个大小的内存空间,并用默认构造函数来初始化这些变量;  
