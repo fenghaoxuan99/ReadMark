@@ -12,15 +12,15 @@
 ## vector 的构造函数
 功能：创建vector容器；
 
-调用时构造函数原型	功能描述
-vector< T > v	类模板的方式，默认构造
-vector< T > v1( v.begin(), v.end() )	将v[begin(), end())区间中的元素拷贝给v1,注意是左闭右开区间
-vector< T > v(n, elem)	构造函数将n个elem拷贝给v
-vector< T > v(const vector &vec)	将 vec 容器拷贝到 v
+|调用时构造函数原型	|功能描述|
+|:--:|--|
+|vector< T > v	                 |类模板的方式，默认构造|
+|vector< T > v1(v.begin, v.end)	 |将v[begin(), end())区间中的元素拷贝给v1,注意是左闭右开区间|
+|vector< T > v(n,elem)           |构造函数将n个elem拷贝给v|
+|vector< T > v(const vector &vec)|将 vec 容器拷贝到 v|
 
 ```cpp
 #include <vector>
-
 void printVector(vector<int>& v) {
 
 	for (vector<int>::iterator it = v.begin(); it != v.end(); it++) {
@@ -65,9 +65,9 @@ int main() {
 ## vector 容量和大小操作
 |调用时的函数原型	|功能|
 |:--:|--|
-|v.empty()	|判断v容器是否为空，空返回假，不空返回真|
+|v.empty()	    |判断v容器是否为空，空返回假，不空返回真|
 |v.capacity()	|计算v容器的容量大小|
-|v.size()	|计算v容器的元素个数|
+|v.size()	    |计算v容器的元素个数|
 |v.resize(num)	|重新指定容器的长度为num，若容器变长，则以默认值 0 填充新位置如果容器变短，则末尾超出容器长度的元素被删除。|
 |v.resize(num,elem)	|重新指定容器的长度为num，若容器变长，则以elem值填充新位置。如果容器变短，则末尾超出容器长度的元素被删除|
 
@@ -75,13 +75,13 @@ int main() {
 
 |接口函数原型	|功能|
 |:--:|--|
-|push_back(ele)	|插入元素ele|
-|pop_back()|	删除最后一个元素|
-|insert(const_iterator pos, ele)	|向迭代器指向位置pos插入元素ele|
-|insert(const_iterator pos, int count,ele)	向|迭代器指向位置pos位置，插入count个ele元素|
-|erase(const_iterator pos)	|删除迭代器指向位置pos的元素|
-|erase(const_iterator start, const_iterator end)	|删除迭代器从start到end之间的元素，注意区间是左闭右开|
-|clear()	|删除容器中所有元素|
+|push_back(ele)	                                |插入元素ele|
+|pop_back()                        			    |删除最后一个元素|
+|insert(const_iterator pos, ele)                |向迭代器指向位置pos插入元素ele|
+|insert(const_iterator pos, int count,ele)	    |迭代器指向位置pos位置，插入count个ele元素|
+|erase(const_iterator pos)	                    |删除迭代器指向位置pos的元素|
+|erase(const_iterator start, const_iterator end)|删除迭代器从start到end之间的元素，注意区间是左闭右开|
+|clear()	                                    |删除容器中所有元素|
 
 ## vector 的数据存取操作
 我们可以通过迭代器去访问vector容器的数据，也可以通过vector容器提供的成员函数去访问；
@@ -90,11 +90,11 @@ int main() {
 |:--:|--|
 |v [ i ]	|访问v容器的下标为i的元素|
 |v.at( i )	|访问v容器的下标为i的元素|
-|v.front( )|	取v容器的第一个元素|
+|v.front( ) |取v容器的第一个元素|
 |v.back( )	|取v容器的最后一个元素|
 
 ## vector 的swap函数收缩空间
-|被调函数原型	|功能|
+|被调函数原型|功能|
 |:--:|--|
 |v.shrink_to_fit()	|将vector容器的容量收缩到和大小一样|
 |v.swap(vec)        |将vec容器于v容器交换数据|

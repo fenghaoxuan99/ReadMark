@@ -1,10 +1,32 @@
 
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
+<!-- code_chunk_output -->
+
+- [STL算法](#stl算法)
+  - [遍历算法](#遍历算法)
+    - [for_each 函数](#for_each-函数)
+    - [transform 函数](#transform-函数)
+  - [查找算法](#查找算法)
+    - [find 函数](#find-函数)
+    - [find_if 函数](#find_if-函数)
+    - [binary_search](#binary_search)
+    - [count 函数](#count-函数)
+    - [count_if 函数](#count_if-函数)
+  - [排序算法](#排序算法)
+    - [sort 函数](#sort-函数)
+    - [random_shuffle 函数](#random_shuffle-函数)
+    - [merge 函数](#merge-函数)
+    - [reverse 函数](#reverse-函数)
+  - [替换算法](#替换算法)
+    - [repalce 函数](#repalce-函数)
+    - [replace _if 函数](#replace-_if-函数)
+
+<!-- /code_chunk_output -->
 
 
 
 # STL算法
-
 ## 遍历算法
 - for_each
 - transform
@@ -12,19 +34,19 @@
 ### for_each 函数
 for_each（iterator begin,iterator end,_func）	
 解释参数：
-begin为容器的起始迭代器，
-end为容器的结束迭代器，
-_func为普通函数名字，或者仿函数（函数对象）
+- begin为容器的起始迭代器，
+- end为容器的结束迭代器，
+- _func为普通函数名字，或者仿函数（函数对象）
 
 ### transform 函数
 注意：使用transform 时候要为 目标容器开辟空间。用resize函数开辟
 
 transform(iterator beg1, iterator end1, iterator beg2, _func)	搬运一个容器到另一个容器中
 解释参数：
-beg1为要被搬运d容器的起始迭代器，
-end1为被搬运容器的结束迭代器，
-beg2为目标容器的起始迭代器，
-_func为普通函数名字，或者仿函数（函数对象）
+- beg1为要被搬运d容器的起始迭代器，
+- end1为被搬运容器的结束迭代器，
+- beg2为目标容器的起始迭代器，
+- _func为普通函数名字，或者仿函数（函数对象）
 ```cpp
 #include<vector>
 #include<algorithm>
@@ -86,9 +108,9 @@ find(iterator beg, iterator end, value);
 - 注意：
 在查找自定义数据类型的元素时候，需要自己重载 == 操作符
 - 参数解释：
-beg为容器的起始迭代器
-end为容器的末尾迭代器
-value为要查找的元素
+  - beg为容器的起始迭代器
+  - end为容器的末尾迭代器
+  - value为要查找的元素
 
 ### find_if 函数
 - 函数原型：
@@ -98,9 +120,9 @@ find(iterator beg, iterator end, _Pred);
 - 注意：
 在查找自定义数据类型的元素时候，需要自己重载 == 操作符
 - 参数解释：
-beg为容器的起始迭代器；
-end为容器的末尾迭代器；
-_Pred为函数名或者谓词（返回bool类型的仿函数）；
+ - beg为容器的起始迭代器；
+ - end为容器的末尾迭代器；
+ - _Pred为函数名或者谓词（返回bool类型的仿函数）；
 总结：
 find_if按条件查找使查找更加灵活，提供的仿函数可以改变不同查找的策略。
 
@@ -113,8 +135,8 @@ bool binary_search(iterator beg, iterator end, value)
 - 注意
 查找的容器必须有序，无序会得不到预期的效果
 - 参数解释：
-beg为容器的起始迭代器
-end为容器的末尾迭代器
+ - beg为容器的起始迭代器
+ - end为容器的末尾迭代器
 
 
 ### count 函数
@@ -125,9 +147,9 @@ count(iterator beg, iterator end, value);
 - 注意：
 统计自定义数据类型需要重载==，返回类型为bool
 - 参数解释：
-beg为容器的起始迭代器；
-end为容器的末尾迭代器；
-value为要统计的元素；
+ - beg为容器的起始迭代器；
+ - end为容器的末尾迭代器；
+ - value为要统计的元素；
 
 ### count_if 函数
 函数原型：
@@ -135,12 +157,11 @@ count_if(iterator beg, iterator end, _Pred);
 - 功能：
 统计容器区间 [beg,end) 中 value出现次数；
 - 参数解释：
-beg为容器的起始迭代器；
-end为容器的末尾迭代器；
-_Pred为函数名或谓词；
+ - beg为容器的起始迭代器；
+ - end为容器的末尾迭代器；
+ - _Pred为函数名或谓词；
 
-
-
+#### 对于自定义的数据类型，需要在类中重载== 操作符
 ```cpp
 #include <algorithm>
 #include <vector>
@@ -210,7 +231,6 @@ void test02() {
 		cout << "找到姓名:" << it->m_Name << " 年龄: " << it->m_Age << endl;
 	}
 }
-
 ```
 
 ## 排序算法
@@ -248,11 +268,11 @@ merge(iterator beg1, iterator end1, iterator beg2, iterator end2, iterator dest)
 - 注意：
 两个容器必须有序，目标容器需要开辟空间
 - 参数解释：
-beg1为容器1的起始迭代器
-end1为容器1的末尾迭代器
-beg2为容器2的起始迭代器
-end2为容器2的末尾迭代器
-dest为目容器的起始迭代器
+ - beg1为容器1的起始迭代器
+ - end1为容器1的末尾迭代器
+ - beg2为容器2的起始迭代器
+ - end2为容器2的末尾迭代器
+ - dest为目容器的起始迭代器
 ```cpp
 #include <algorithm>
 #include <vector>
@@ -284,17 +304,16 @@ void test01()
 	for_each(vtarget.begin(), vtarget.end(), myPrint());
 	cout << endl;
 }
-
 ```
 
-## reverse 函数
+### reverse 函数
 - 函数原型：
 reverse(iterator beg, iterator end);
 - 功能：
 反转容器[beg,end）范围的数据
 - 参数解释：
-beg为容器的起始迭代器
-end为容器的末尾迭代器
+ - beg为容器的起始迭代器
+ - end为容器的末尾迭代器
 
 ## 替换算法
 - replace	将容器内指定范围的旧元素修改为新元素

@@ -20,7 +20,6 @@ size(): 返回栈的大小
 
 ```cpp
 #include <stack>
-
 //栈容器常用接口
 void test01()
 {
@@ -42,6 +41,4 @@ void test01()
 	cout << "栈的大小为：" << s.size() << endl;
 
 }
-
-
 ```
