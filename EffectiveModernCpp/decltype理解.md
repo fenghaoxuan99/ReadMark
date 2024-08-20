@@ -1,6 +1,6 @@
 
 
-# Item 3: Understand decltype
+# 理解decltype
 
 ```cpp
 template<typename Container, typename Index>    //可以工作，
@@ -12,24 +12,19 @@ auto authAndAccess(Container& c, Index i)       //但是需要改良
 }
 
 template<typename Container, typename Index>    //最终的C++14版本
-decltype(auto)
-authAndAccess(Container&& c, Index i)
+decltype(auto) authAndAccess(Container&& c, Index i)
 {
     authenticateUser();
     return std::forward<Container>(c)[i];
 }
 
 template<typename Container, typename Index>    //最终的C++11版本
-auto
-authAndAccess(Container&& c, Index i)
+auto authAndAccess(Container&& c, Index i)
 ->decltype(std::forward<Container>(c)[i])
 {
     authenticateUser();
     return std::forward<Container>(c)[i];
 }
-
-
-
 ```
 函数名称前面的auto不会做任何的类型推导工作。他只是暗示使用了C++11的尾置返回类型语法，即在函数形参列表后面使用一个->符号
 指出函数的返回类型，尾置返回类型的好处是我们可以在函数返回类型中使用函数形参相关的信息。
