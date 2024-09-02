@@ -18,7 +18,7 @@
 string 是 c++ 的字符串，本质是一个类；
 char* 是一个指针，而 string 是类， 类内封装 char*，管理 char*，使用 string 不用担心字符越界问题，因为这都是类内管理好的了。
 
-|构造函数的原型|	功能|
+|构造函数的原型|功能|
 |:--:|--|
 |string( )	                |初始化空串|
 |string(const char* str)	|将字符串 str 初始化 string 的对象|

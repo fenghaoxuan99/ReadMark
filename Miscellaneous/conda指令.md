@@ -1,8 +1,31 @@
 
 
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+- [conda指令](#conda指令)
+  - [创建虚拟环境](#创建虚拟环境)
+  - [激活/使用/进入某个虚拟环境](#激活使用进入某个虚拟环境)
+  - [退出当前环境](#退出当前环境)
+  - [复制某个虚拟环境](#复制某个虚拟环境)
+  - [删除某个环境](#删除某个环境)
+  - [查看当前所有环境](#查看当前所有环境)
+  - [查看当前虚拟环境下的所有安装包](#查看当前虚拟环境下的所有安装包)
+  - [安装或卸载包(进入虚拟环境之后)](#安装或卸载包进入虚拟环境之后)
+  - [分享虚拟环境](#分享虚拟环境)
+  - [清理anaconda缓存](#清理anaconda缓存)
+  - [源服务器管理](#源服务器管理)
+    - [国内pip源](#国内pip源)
+  - [升级](#升级)
+  - [卸载](#卸载)
+  - [批量导出虚拟环境中的所有组件](#批量导出虚拟环境中的所有组件)
+  - [pip批量导出环境中的所有组件](#pip批量导出环境中的所有组件)
+
+<!-- /code_chunk_output -->
+
 
 # conda指令
-
 ## 创建虚拟环境
 conda  create  --name  env_name
 conda  create  --name  env_name python=3.6 # 创建指定python版本
@@ -52,8 +75,8 @@ conda clean -y -all # 删除所有的安装包及cache(索引缓存、锁定文�
 conda当前的源设置在$HOME/.condarc中，可通过文本查看器查看或者使用命令>conda config --show-sources查看。
 
 conda config --show-sources      查看当前使用源
-conda config --remove channels   源名称或链接 #删除指定源
-conda config --add    channels   源名称或链接 #添加指定源
+conda config --remove channels   源名称或链接        #删除指定源
+conda config --add    channels   源名称或链接        #添加指定源
 例如：
 
 conda config --add channels  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/

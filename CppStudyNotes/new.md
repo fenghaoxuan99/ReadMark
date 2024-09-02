@@ -18,7 +18,6 @@ char* p = new char[6];     strcpy(p,"Hello");
 5. placement new
 
 这种new允许在一块已经分配成功的内存上重新构造对象或对象数组。placement new不用担心内存分配失败，因为它根本不分配内存，它做的唯一一件事情就是调用对象的构造函数。定义如下：
-
 void* operator new(size_t,void*);
 void operator delete(void*,void*);
  
@@ -34,8 +33,8 @@ int main()
 		cout << "alloc failed" << endl;
 	}
 	ADT *q = new(p) ADT;  //placement new:不必担心失败，只要p所指对象的的空间足够ADT创建即可
-	//delete q;//错误!不能在此处调用delete q;
-	q->ADT::~ADT();//显示调用析构函数
+	//delete q;           //错误!不能在此处调用delete q;
+	q->ADT::~ADT();       //显示调用析构函数
 	delete[] p;
 	return 0;
 }

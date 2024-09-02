@@ -1,14 +1,9 @@
-
-
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
-
 <!-- code_chunk_output -->
-
 - [deque 的内部实现原理：](#deque-的内部实现原理)
 - [deque 的插入和删除](#deque-的插入和删除)
 - [deque 的数据获取](#deque-的数据获取)
 - [命名空间](#命名空间)
-
 <!-- /code_chunk_output -->
 
 
@@ -34,12 +29,10 @@
 ## deque 的数据获取
 |函数原型|	功能|
 |:--:|--|
-|at(int idx)	|返回索引idx所指的数据|
+|at(int idx)|返回索引idx所指的数据|
 |operator[]	|返回索引idx所指的数据|
-|front()|	获取容器中第一个数据元素|
-|back()|	获取容器中最后一个数据元素|
-
-
+|front()	|获取容器中第一个数据元素|
+|back()		|获取容器中最后一个数据元素|
 
 ## 命名空间
 命名空间就是为了防止名字冲突而引入的一种机制。

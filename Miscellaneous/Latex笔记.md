@@ -192,12 +192,16 @@ $$\sqrt{2} \quad and \quad \sqrt[n]{x+y}$$
 ## 对数
 \log_{对数底数}{表达式}
 表达式的大括号可省略
+$$
+\log_{2}{x} \quad and \quad \log_{10}{x} \quad and \quad \log_{x}{y}
+$$
 
+ 
 ## 省略号
 数学公式中常见的省略号有两种，\ldots 表示与文本底线对齐的横向省略号 … \ldots…，\cdots 表示与文本中线对齐的横向省略号 ⋯ \cdots⋯，\vdots表示纵向省略号 ⋮ \vdots⋮，\ddots表示斜向省略号 ⋱ \ddots⋱。
 
 例子：
-$$f(x_1,x_2,\underbrace{\ldots}_{\rm ldots} ,x_n) = x_1^2 + x_2^2 + \overbrace{\cdots}^{\rm cdots} + x_n^2$$
+$$f(x_1,x_2,\underbrace{\ldots}_{\ ldots} ,x_n) = x_1^2 + x_2^2 + \overbrace{\cdots}^{\rm cdots} + x_n^2$$
 
 ## 最值
 \max_{下标表达式}{最值表达式}表示最大值，\min_{下标表达式}{最值表达式}表达最小值。

@@ -62,13 +62,10 @@ subprocess.PIPE 是一个特殊的值，用来告诉 subprocess.Popen() 创建�
 示例用法：
 ```py
 import subprocess
-
 # 创建一个子进程，并将标准输出重定向到一个管道
 process = subprocess.Popen(['ls', '-l'], stdout=subprocess.PIPE, text=True)
-
 # 从管道中读取输出
 output = process.stdout.read()
-
 # 打印输出内容
 print(output)
 ```
