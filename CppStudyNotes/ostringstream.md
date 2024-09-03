@@ -1,5 +1,97 @@
 
 
+
+
+
+
+ stringstream[^1]是C++提供的专门用于处理字符串的输入输出流类。
+
+
+
+
+
+
+```cpp
+#include <iostream>
+#include <sstream>
+using namespace std;
+int main()
+{
+    ostringstream ss("1 2 3 4 ", std::ios_base::ate);	// append 方式追加
+    cout << ss.str() << endl;
+ 
+    ss << "5 3 4";
+    cout << ss.str() << endl;
+    
+    return 0;
+}
+/*
+输出：
+1 2 3 4 
+1 2 3 4 5 3 4
+*/
+```
+
+## 修改、清空 stringstream 内容
+ stringstream  的内容可以通过 str() 函数进行修改、清空：
+```cpp
+#include <iostream>
+#include <sstream>
+using namespace std;
+int main()
+{
+    stringstream ss("hello string");
+    cout << ss.str() << endl;
+    // 修改内容
+    ss.str("hello stringstream");
+    cout << ss.str() << endl;
+    // 清空内容
+    ss.str("");
+    cout << ss.str() << endl;
+    return 0;
+} 
+/*
+输出：
+fghewoo
+123456
+ 
+*/
+```
+
+
+```cpp
+#include <iostream>
+#include <sstream>
+using namespace std;
+ 
+int main()
+{
+    string source = "abc,123,<!>";
+    stringstream ss(source);
+    cout << ss.str() << endl;
+    
+	cout<< endl;
+ 
+    string str;
+    while (getline(ss, str, ','))
+    {
+        cout << str << endl;
+    }
+ 
+    return 0;
+}
+ 
+/*
+输出：
+abc,123,<!>
+ 
+abc
+123
+<!>
+*/
+```
+
+
 # std::ostringstream
 std::ostringstream 是 C++ 标准库中的一个输出字符串流类，它可以用于将各种数据类型转换为字符串，并且支持格式控制和字符串拼接操作。
 ## 头文件
@@ -37,3 +129,7 @@ oss.str(""); // 清空流中的内容
 oss << "World!";
 std::string result = oss.str(); // result 现在是 "World!"
 ```
+
+
+
+[^1]:[参考资料](https://blog.csdn.net/weixin_45031801/article/details/136921743)
