@@ -127,8 +127,28 @@ void test01()
 
 ## string的大小和容量
 1. size()和length()：返回string对象的字符个数，他们执行效果相同。
-
 2. max_size()：返回string对象最多包含的字符数，超出会抛出length_error异常
-
 3. capacity()：重新分配内存之前，string对象能包含的最大字符数
 
+## 类型转换处理
+### 转为string类型
+
+1. to_string()：将其他类型转换为string类型
+2. 通过 ostringstream 转换
+    int num = 123;
+    std::ostringstream ss;
+    ss << num;
+    ss.str();
+    
+### 转为int类型
+1.  std::string str = "668";
+    int num = 0;
+ 	sscanf(str.c_str(), "%d", &num);
+2. 通过 istringstream 转换
+    std::string str = "668";
+    int num = 0;
+    std::istringstream ss(str);
+    ss >> num;
+
+c_str()：生成一个const char*指针，指向以空字符终止的数组。
+strcpy(c,s.c_str());将数据进行拷贝。
