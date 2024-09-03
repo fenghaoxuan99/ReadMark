@@ -120,7 +120,6 @@ void test02()
 
 	//收缩内存
 	vector<int>(v).swap(v); //vector<int>(v)匿名对象
-
 	cout << "v的容量为：" << v.capacity() << endl;
 	cout << "v的大小为：" << v.size() << endl;
 }

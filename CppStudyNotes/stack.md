@@ -2,21 +2,14 @@
 
 
 ## stack 的常用接口
-stack<T> s: 初始化空栈；
-
-stack(const stack &s)：拷贝栈；
-
+stack<T> s: 			初始化空栈；
+stack(const stack &s)：	拷贝栈；
 stack& operator=(const stack &s):赋值栈
-
-push(elem): 向栈顶添加元素
-
-pop():从栈顶移除第一个元素
-
-top(): 返回栈顶元素
-
-empty(): 判断堆栈是否为空
-
-size(): 返回栈的大小
+push(elem): 			向栈顶添加元素
+pop():					从栈顶移除第一个元素
+top():					 返回栈顶元素
+empty(): 				判断堆栈是否为空
+size(): 				返回栈的大小
 
 ```cpp
 #include <stack>
