@@ -2,14 +2,8 @@
 
 
 
-
-
- stringstream[^1]是C++提供的专门用于处理字符串的输入输出流类。
-
-
-
-
-
+# stringstream
+stringstream[^1]是C++提供的专门用于处理字符串的输入输出流类。
 
 ```cpp
 #include <iostream>
@@ -32,8 +26,8 @@ int main()
 */
 ```
 
-## 修改、清空 stringstream 内容
- stringstream  的内容可以通过 str() 函数进行修改、清空：
+## 修改、清空stringstream 内容
+stringstream的内容可以通过str()函数进行修改、清空：
 ```cpp
 #include <iostream>
 #include <sstream>
