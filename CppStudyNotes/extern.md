@@ -2,9 +2,11 @@
 
 
 
+
+
+
 ```cpp
 // math.h文件的内容 
-
 //意思是如果使用该头文件math.h的文件定义了__cplusplus，
 //则下面代码到#endif都是有效的,在这里是 extern "C" { 有效
 #ifdef __cplusplus 
@@ -23,3 +25,29 @@ int div(int x,int y); //除法
 #endif  //__cplusplus
 
 ```
+
+## C++调用C函数
+//xx.h
+extern int add(...)
+
+//xx.c
+int add(){
+
+}
+
+//xx.cpp
+extern "C" {
+    #include "xx.h"
+}
+## C调用C++函数
+
+//xx.h
+extern "C"{
+    int add();
+}
+//xx.cpp
+int add(){
+
+}
+//xx.c
+extern int add();
