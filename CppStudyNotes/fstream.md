@@ -38,9 +38,9 @@ C++的IO类中定义了三个文件读写流fstream、ifstream以及ofstream，�
 |函数名	|用途|
 |--|--|
 |open(s, mode)	    |以mode模式打开文件s|
-|close()	        |关闭文件流|
+|close()	          |关闭文件流|
 |is_open()	        |返回文件是否已经打开|
-|read(buff, size)	|读入最多size字节数据到buff中|
+|read(buff, size)	  |读入最多size字节数据到buff中|
 |write(buff, size)	|写入size字节数据到文件中|
 
 ### void open(const char* filename,int mode,int access);
@@ -52,12 +52,12 @@ access 打开文件的属性取值是：
 
 |模式|说明|
 |--|--|
-|ios::in	|以读方式打开|
-|ios::out	|以写方式打开|
-|ios::app	|以追加写方式打开|
+|ios::in	  |以读方式打开|
+|ios::out	  |以写方式打开|
+|ios::app	  |以追加写方式打开|
 |ios::trunc	|以截断方式打开文件|
 |ios:binary	|以二进制方式打开文件|
-|ios::ate	|打开文件后指针定位到文件尾|
+|ios::ate	  |打开文件后指针定位到文件尾|
 |ios::nocreate 　|不建立文件，所以文件不存在时打开失败|
 |ios::noreplace　|不覆盖文件，所以打开文件时如果文件存在失败|
 
@@ -114,11 +114,16 @@ return 0;
 ### 流状态
 流在执行IO操作的时候，会根据不同的情况产生不同的状态码，如：
 
+1. good()：检查流是否处于有效状态，即未发生任何错误。返回true表示流处于有效状态。
+2. bad()：检查流是否处于错误状态。返回true表示流处于错误状态。
+3. fail()：检查流是否处于失败状态，可能是由于输入/输出操作失败，但并非致命错误。返回true表示流处于失败状态。
+4. eof()：检查是否已经达到文件的末尾（end-of-file）。返回true表示已经达到文件末尾。
+
 |状态位	|说明|
 |--|--|
-|strm::badbit	|流已崩溃|
+|strm::badbit	  |流已崩溃|
 |strm::failgit	|IO已崩溃|
-|strm::eofbit	|已经读到文件尾|
+|strm::eofbit	  |已经读到文件尾|
 |strm::goodbit	|一切正常，没有异常|
 我们可以使用已经封装好的函数bad()/fail()/eof()/good()来判断当前IO是否已经达到某种状态，如判断文件是否已经读到结束。同时，我们还可以使用clear()函数来清除当前IO对象的状态位，当流已崩溃（如将流中的字符串对象读到一个int对象上）时，可以手动来清除状态位继续往下读取。
 
