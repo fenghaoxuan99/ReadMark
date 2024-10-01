@@ -13,7 +13,7 @@ target_include_directories(<target>
     [<INTERFACE|PUBLIC|PRIVATE> [items2...] ...])
 ```
 
-- `<target>`：指定目标名称，可以是可执行文件或库。
+- `<target>`：    指定目标名称，可以是可执行文件或库。
 - `<INTERFACE|PUBLIC|PRIVATE>`：指定包含路径的作用域：
   - `INTERFACE`：当其他目标链接到这个目标时，这些包含路径会被传递给依赖目标。
   - `PUBLIC`：这些包含路径会被添加到目标本身以及依赖于该目标的其他目标。
@@ -47,7 +47,7 @@ target_include_directories(<target>
 
 使用 `target_include_directories` 可以更精确地控制包含路径的作用域，从而避免不必要的依赖传递和潜在的编译问题。
 
-
+## 输出设置
 set (LIBRARY_OUTPUT_PATH    ${PROJECT_SOURCE_DIR}/lib)
 set (EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 add_compile_options(-std=c++11 -Wall) 
@@ -68,15 +68,15 @@ set_target_properties(<target>...
 
 ### 常用属性
 
-- `OUTPUT_NAME`：设置目标的输出文件名（不包含目录路径和扩展名）。
-- `ARCHIVE_OUTPUT_DIRECTORY`：设置静态库的输出目录。
-- `LIBRARY_OUTPUT_DIRECTORY`：设置共享库的输出目录。
-- `RUNTIME_OUTPUT_DIRECTORY`：设置可执行文件的输出目录。
-- `INCLUDE_DIRECTORIES`：设置目标的包含目录。
-- `COMPILE_DEFINITIONS`：设置目标的预处理器定义。
-- `COMPILE_OPTIONS`：设置目标的编译选项。
-- `LINK_LIBRARIES`：设置目标的链接库。
-- `POSITION_INDEPENDENT_CODE`：对于共享库，设置为 `TRUE` 以启用位置无关代码（PIC）。
+- `OUTPUT_NAME`：                设置目标的输出文件名（不包含目录路径和扩展名）。
+- `ARCHIVE_OUTPUT_DIRECTORY`：   设置静态库的输出目录。
+- `LIBRARY_OUTPUT_DIRECTORY`：   设置共享库的输出目录。
+- `RUNTIME_OUTPUT_DIRECTORY`：   设置可执行文件的输出目录。
+- `INCLUDE_DIRECTORIES`：        设置目标的包含目录。
+- `COMPILE_DEFINITIONS`：        设置目标的预处理器定义。
+- `COMPILE_OPTIONS`：            设置目标的编译选项。
+- `LINK_LIBRARIES`：             设置目标的链接库。
+- `POSITION_INDEPENDENT_CODE`：  对于共享库，设置为 `TRUE` 以启用位置无关代码（PIC）。
 
 ### 示例
 
@@ -171,3 +171,60 @@ configure_file(
 - `configure_file` 命令在每次运行 CMake 时都会执行，如果源文件或变量值发生变化，目标文件也会相应更新。
 - 如果需要在不同构建类型或配置之间使用不同的配置文件，可以使用条件语句来设置不同的变量值。
 - 从 CMake 3.10 开始，推荐使用 `configure_package_config_file` 或 `file(GENERATE)` 命令来替代 `configure_file`，因为它们提供了更多的灵活性和功能。
+
+
+
+
+
+`find_package` 是 CMake 中一个非常强大的命令，用于在构建系统中定位外部库和软件包。这个命令会搜索指定的软件包，并根据找到的软件包设置一系列变量，这些变量可以用来指定如何编译和链接到这些软件包。
+
+### 基本语法
+
+```cmake
+find_package(<package> [version] [EXACT] [QUIET] [MODULE]
+            [REQUIRED] [[COMPONENTS] [components...]]
+            [OPTIONAL_COMPONENTS components...]
+            [NO_POLICY_SCOPE])
+```
+
+- `<package>`：要查找的软件包的名称。
+- `version`：指定软件包的版本要求。可以是最小版本号，或者使用 `EXACT` 选项指定精确版本。
+- `EXACT`：如果指定，要求找到的软件包版本必须与指定的版本完全匹配。
+- `QUIET`：指定在查找过程中不输出任何诊断信息。
+- `MODULE`：指定使用模块模式的查找方式，这通常意味着查找 `Find<package>.cmake` 文件。
+- `REQUIRED`：如果指定，找不到软件包时，CMake 将报错并停止构建过程。
+- `COMPONENTS`：指定需要查找的软件包的组件。
+- `OPTIONAL_COMPONENTS`：指定可选的组件，如果这些组件找不到，不会报错。
+- `NO_POLICY_SCOPE`：防止在 find_package 调用中设置的任何 CMake 策略影响全局状态。
+
+### 示例
+
+假设您需要在项目中使用 Qt5，您可以在 `CMakeLists.txt` 文件中使用 `find_package` 来查找 Qt5：
+
+```cmake
+cmake_minimum_required(VERSION 3.5)
+project(MyQtApp)
+
+# 查找 Qt5 核心模块，要求版本至少为 5.12
+find_package(Qt5Core 5.12 REQUIRED)
+
+# 包含 Qt5 的头文件目录
+include_directories(${Qt5Core_INCLUDE_DIRS})
+
+# 添加可执行文件
+add_executable(MyQtApp main.cpp)
+
+# 链接 Qt5 核心模块库
+target_link_libraries(MyQtApp Qt5::Core)
+```
+
+在这个例子中，`find_package` 命令查找 Qt5 核心模块，并设置了一系列变量，如 `Qt5Core_INCLUDE_DIRS` 和 `Qt5::Core`。然后，您可以使用这些变量来包含头文件和链接库。
+
+### 注意事项
+
+- `find_package` 命令通常在项目的顶层 `CMakeLists.txt` 文件中调用，以确保找到的包对整个项目可用。
+- 如果使用 `REQUIRED` 选项，当找不到指定的软件包时，CMake 将报错并停止构建过程。
+- 使用 `find_package` 时，CMake 会在默认的路径和 `CMAKE_PREFIX_PATH` 指定的路径中查找软件包。可以通过设置 `CMAKE_PREFIX_PATH` 来指定额外的查找路径。
+- 一些软件包可能提供了多个组件，您可以使用 `COMPONENTS` 选项来指定需要查找的组件。
+
+`find_package` 是 CMake 构建外部依赖关系的关键工具，它使得集成第三方库变得简单而直接。
