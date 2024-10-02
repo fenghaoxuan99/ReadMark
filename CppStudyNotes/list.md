@@ -1,6 +1,5 @@
 
-
-# list 容器的基本概念
+# list 容器
 - 概念：
 list 容器就是一个==双向循环链表==
 - 说明：
@@ -12,7 +11,7 @@ list 的迭代器支++ 和 – 的操作,不支持 +1 的操作。
 
 
 |函数原型|	功能|
-|:--:|--|
+|:--:|:--|
 |push_back(elem)	|尾插elem|
 |pop_back()	        |尾删|
 |push_front(elem)	|头插elem|
@@ -33,3 +32,118 @@ cbegin()	// 和 begin() 功能相同，只不过在其基础上，增加了 cons
 cend()		// 和 end() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改元素。
 crbegin()	// 和 rbegin() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改元素。
 crend()		// 	和 rend() 功能相同，只不过在其基础上，增加了 const 属性，不能用于修改元素。
+
+
+
+
+#### std::list<T,Allocator>::reverse
+1. void reverse();
+2. void reverse() noexcept;
+```cpp
+#include <iostream>
+#include <list>
+ 
+std::ostream& operator<<(std::ostream& ostr, const std::list<int>& list)
+{
+    for (auto &i : list) {
+        ostr << " " << i;
+    }
+    return ostr;
+}
+ 
+int main()
+{
+    std::list<int> list = { 8,7,5,9,0,1,3,2,6,4 };
+ 
+    std::cout << "before:     " << list << "\n";
+    list.sort();
+    std::cout << "ascending:  " << list << "\n";
+    list.reverse();
+    std::cout << "descending: " << list << "\n";
+}
+```
+
+
+#### std::list<T,Allocator>::unique
+从容器移除所有相继的重复元素。只留下相等元素组中的第一个元素。
+
+#### std::list<T,Allocator>::sort
+```cpp
+int main()
+{
+    std::list<int> list = { 8,7,5,9,0,1,3,2,6,4 };
+ 
+    std::cout << "before:     " << list << "\n";
+    list.sort();
+    std::cout << "ascending:  " << list << "\n";
+    list.sort(std::greater<int>());
+    std::cout << "descending: " << list << "\n";
+}
+```
+#### std::list<T,Allocator>::assign
+1. void assign( size_type count, const T& value );
+2. template< class InputIt >
+void assign( InputIt first, InputIt last );
+3. void assign( std::initializer_list<T> ilist );
+
+```cpp
+int main()
+{
+    std::list<char> characters;
+ 
+    characters.assign(5, 'a');
+ 
+    for (char c : characters) {
+        std::cout << c << ' ';
+    } 
+ 
+    characters.assign({'\n', 'C', '+', '+', '1', '1', '\n'});
+ 
+    for (char c : characters) {
+        std::cout << c;
+    }
+
+```
+
+#### std::list<T,Allocator>::merge
+归并二个已排序链表为一个。链表应以升序排序。
+1. void merge( list& other );
+2. void merge( list&& other );
+3. template <class Compare>
+void merge( list& other, Compare comp );
+4. template <class Compare>
+void merge( list&& other, Compare comp );
+
+
+other	-	要交换的另一容器
+comp	-	比较函数对象（即满足比较 (Compare) 概念的对象），若第一参数小于（即先序于）第二参数则返回 ​true 。
+比较函数的签名应等价于如下：
+
+ bool cmp(const Type1 &a, const Type2 &b);
+
+
+#### std::list<T,Allocator>::remove, remove_if
+1. void remove( const T& value );
+2. size_type remove( const T& value );
+3. template< class UnaryPredicate >
+void remove_if( UnaryPredicate p );
+4. template< class UnaryPredicate >
+size_type remove_if( UnaryPredicate p );
+移除所有满足特定标准的元素。第一版本移除所有等于 value 的元素，第二版本移除所有谓词 p 对它返回 true 的元素。
+参数
+value	-	要移除的元素的值
+p	   -	若应该移除该元素则返回 ​true 的一元谓词。
+
+```cpp
+int main()
+{
+    std::list<int> l = { 1,100,2,3,10,1,11,-1,12 };
+ 
+    l.remove(1); // 移除两个等于 1 的元素
+    l.remove_if([](int n){ return n > 10; }); // 移除全部大于 10 的元素
+ 
+    for (int n : l) {
+        std::cout << n << ' '; 
+    }
+    std::cout 
+```

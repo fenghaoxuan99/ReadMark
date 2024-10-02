@@ -1,8 +1,10 @@
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 <!-- code_chunk_output -->
 - [deque 的内部实现原理：](#deque-的内部实现原理)
+- [deque 的内部实现原理：](#deque-的内部实现原理)
 - [deque 的插入和删除](#deque-的插入和删除)
 - [deque 的数据获取](#deque-的数据获取)
+- [命名空间](#命名空间)
 - [命名空间](#命名空间)
 <!-- /code_chunk_output -->
 
