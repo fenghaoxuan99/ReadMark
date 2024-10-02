@@ -34,6 +34,7 @@
   - [git的历史版本查看与版本回退](#git的历史版本查看与版本回退)
     - [git 历史查看命令](#git-历史查看命令)
     - [git 版本回退命令](#git-版本回退命令)
+  - [Using a USB memory stick/HDD](#using-a-usb-memory-stickhdd)
 
 <!-- /code_chunk_output -->
 
@@ -231,10 +232,8 @@ git checkout -b 分支名称 标签名称
 ---
 
 ## Using a USB memory stick/HDD
-
 1. git init --bare 
 是一个Git命令，用于初始化一个新的Git仓库，但是这个仓库是空的，没有工作目录。这种类型的仓库通常用作远程仓库，即其他开发者可以推送(push)他们的代码到这个仓库，也可以从这个仓库拉取(pull)代码，但是不能在这个仓库上进行本地开发。
-
 2. git remote add origin /path/to/memory/stick/repoName.git
 3. git push origin master
 

@@ -2,8 +2,6 @@
 
 # MPE使用
 
-
-
 ## 空格
 - &nbsp
 不换行空格，全称是 No-Break Space，它是最常见和我们使用最多的空格，大多数的人可能只接触了 ，它是按下space键产生的空格。在HTML中，如果你用空格键产生此空格，空格是不会累加的（只算1个）。要使用html实体表示才可累加，该空格占据宽度受字体影响明显而强烈。
@@ -33,6 +31,4 @@ is maintained by the W3C.
 ## Admonitions插件
 !!! success This is the admonition title
     This is the admonition body
-
-
 ==**note abstract info tip success question warning failure danger bug example quote**==
