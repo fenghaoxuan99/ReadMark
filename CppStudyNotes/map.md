@@ -5,9 +5,10 @@
 - unordered_map: unordered_map内部实现了一个哈希表（也叫散列表，通过把关键码值映射到Hash表中一个位置来访问记录，查找的时间复杂度可达到O(1)）因此，其元素的排列顺序是无序的。
 
 
+
 ```cpp
-map<string,int>m;//定义m
- 
+map<string,int>m;//定义一个map对象m
+
 1：使用insert添加元素
 m.insert(pair<string,int>("sd",19));
 m.insert(make_pair(string("def"), 2));

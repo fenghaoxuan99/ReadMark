@@ -1,11 +1,11 @@
 
 
 ## STL的六大组件
-1. 容器：各种模板的数据结构，如vector,string,deque,set,map等，就是用来存储数据用的。
-2. 算法：各种常用算法，如sort、find、copy、for_each等。
-3. 迭代器：容器和算法之间的联系桥廊，可以理解为指针；
-4. 配接器：一种用来修饰容器或者仿函数或迭代器接口的东西。
-5. 仿函数：行为类似函数，可作为算法的某种策略。
+1. 容器： 	  各种模板的数据结构，如vector,string,deque,set,map等，就是用来存储数据用的。
+2. 算法：     各种常用算法，如sort、find、copy、for_each等。
+3. 迭代器：	  容器和算法之间的联系桥廊，可以理解为指针；
+4. 配接器：	  一种用来修饰容器或者仿函数或迭代器接口的东西。
+5. 仿函数：   行为类似函数，可作为算法的某种策略。
 6. 空间适配器：负责空间的配置与管理。
 
 
@@ -51,15 +51,6 @@ void test01()
 	vector<int> v4(v3);
 	printVector(v4);
 }
-
-int main() {
-
-	test01();
-
-	system("pause");
-
-	return 0;
-}
 ```
 
 ## vector 容量和大小操作
@@ -76,7 +67,7 @@ int main() {
 |接口函数原型	|功能|
 |:--:|--|
 |push_back(ele)	                                |插入元素ele|
-|pop_back()                        			    |删除最后一个元素|
+|pop_back()                        			    |删除最后一个元素 ！！！没有返回值|
 |insert(const_iterator pos, ele)                |向迭代器指向位置pos插入元素ele|
 |insert(const_iterator pos, int count,ele)	    |迭代器指向位置pos位置，插入count个ele元素|
 |erase(const_iterator pos)	                    |删除迭代器指向位置pos的元素|

@@ -1,10 +1,7 @@
 
-
-
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
-
 <!-- code_chunk_output -->
-
+- [插入公式](#插入公式)
 - [插入公式](#插入公式)
   - [左对齐例子：](#左对齐例子)
   - [居中对齐例子：](#居中对齐例子)
@@ -173,8 +170,6 @@ $$\bigg[ \big[ [ ] \big] \bigg]$$
 $$\bigg| \big| | | \big| \bigg|$$
 
 
-
-
 ## 分式
 通常使用 \frac {分子} {分母} 命令产生一个分式，分式可嵌套。
 如果分式很复杂，亦可使用 分子 \over 分母 命令，此时分式仅有一层。
@@ -253,7 +248,7 @@ $$\sum_{i=1}^n \frac{1}{i^2} \quad and \quad \prod_{i=1}^n \frac{1}{i^2} \quad a
 也可以使用 \overrightarrow等命令自定义字母上方的符号。
 
 ### 例子：
-$$\vec{a} \cdot \vec{b}=0$$
+$$\vec{a} \cdot \vec{b} = 0$$
 
 ### 例子：
 $$\underleftarrow{xy} \quad and \quad \overleftrightarrow{xy} \quad and \quad \overrightarrow{xy}$$

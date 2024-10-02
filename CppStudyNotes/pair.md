@@ -1,7 +1,12 @@
 
 
 # pair 
-|||
+
+
+std::pair 是类模板，提供在一个单元存储两个相异类型对象的途径。 pair 是 std::tuple 的拥有两个元素的特殊情况。
+
+
+|函数的原型	|功能|
 |:--:|--|
 |pair<T1, T2> p1;            |创建一个空的pair对象（使用默认构造），它的两个元素分别是T1和T2类型，采用值初始化。|
 |pair<T1, T2> p1(v1, v2);    |创建一个pair对象，它的两个元素分别是T1和T2类型，其中first成员初始化为v1，second成员初始化为v2。|
@@ -19,12 +24,19 @@ std::pair<std::string, int> getPreson() {
     return std::make_pair("Sven", 25);
 }
  
-int main(int argc, char **argv) {
+void main(int argc, char **argv) {
     std::string name;
     int ages;
  
     std::tie(name, ages) = getPreson();
     std::cout << "name: " << name << ", ages: " << ages << std::endl;
-    return 0;
+   
+    auto p = std::make_pair(1, 3.14);
+    std::cout << '(' << std::get<0>(p)   << ", " << std::get<1>(p) << ")\n";
+    std::cout << '(' << std::get<int>(p) << ", " << std::get<double>(p) << ")\n";
 }
 ```
+
+
+
+

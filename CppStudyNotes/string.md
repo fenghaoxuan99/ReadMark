@@ -121,9 +121,9 @@ void test01()
 |函数原型	|功能|
 |:--:|--|
 |string& insert(int pos, const char* str)	|从pos位置插入字符串str|
-|string& insert(int pos, const string& str	|从pos位置插入字符串str|
+|string& insert(int pos, const string& str)	|从pos位置插入字符串str|
 |string& insert(int pos, int n, char c)	    |从pos位置插入n字符串c|
-|string& erase(int pos, int n = npos)       |从 pos开始删除n个字符|
+|string& erase (int pos, int n = npos)      |从 pos开始删除n个字符|
 
 ## string的大小和容量
 1. size()和length()：返回string对象的字符个数，他们执行效果相同。
@@ -152,3 +152,36 @@ void test01()
 
 c_str()：生成一个const char*指针，指向以空字符终止的数组。
 strcpy(c,s.c_str());将数据进行拷贝。
+
+
+std::stoi, std::stol, std::stoll
+std::stoul, std::stoull
+===
+int       stoi( const std::string& str, std::size_t* pos = 0, int base = 10 );
+int       stoi( const std::wstring& str, std::size_t* pos = 0, int base = 10 );
+
+long      stol( const std::string& str, std::size_t* pos = 0, int base = 10 );
+long      stol( const std::wstring& str, std::size_t* pos = 0, int base = 10 );
+
+long long stoll( const std::string& str, std::size_t* pos = 0, int base = 10 );
+long long stoll( const std::wstring& str, std::size_t* pos = 0, int base = 10 );
+
+若 pos 不是空指针，则指针 ptr ——转换函数内部者——将接收 str.c_str() 中首个未转换字符的地址，将计算该字符的下标并存储之于 *pos ，该对象给出转换所处理的字符数。
+str	-	要转换的字符串
+pos	-	存储已处理字符数的整数的地址
+bas -	数的底数，默认为 10
+
+
+
+#### copy函数
+size_type copy( CharT* dest, size_type count, size_type pos = 0 ) const;
+constexpr size_type copy( CharT* dest, size_type count, size_type pos = 0 ) const;
+复制子串 [pos, pos+count) 到 dest 所指向的字符串。若请求的子串越过 string 结尾，或若 count == npos ，则复制的子串为 [pos, size()) 。产生的字符串不是空终止的。
+
+若 pos > size() ，则抛出 std::out_of_range 。
+
+
+#### std::hash (std::string)
+  std::cout << std::hash<std::string>{}(s) << '\n';
+
+
