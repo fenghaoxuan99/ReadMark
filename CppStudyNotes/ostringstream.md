@@ -1,5 +1,13 @@
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+<!-- code_chunk_output -->
 
+- [stringstream](#stringstream)
+  - [修改、清空stringstream 内容](#修改-清空stringstream-内容)
+- [std::ostringstream](#stdostringstream)
+  - [头文件](#头文件)
+  - [基本用法](#基本用法)
 
+<!-- /code_chunk_output -->
 
 
 # stringstream

@@ -5,13 +5,14 @@
 
 <!-- code_chunk_output -->
 
-- [std::optional<T>::value](#stdoptionaltvalue)
-- [std::optional<T>::value_or](#stdoptionaltvalue_or)
-- [void reset() noexcept;](#void-reset-noexcept)
-- [std::optional<T>::swap](#stdoptionaltswap)
-- [std::make_optional](#stdmake_optional)
-- [std::optional<T>::emplace](#stdoptionaltemplace)
-- [std::optional<T>::operator bool, std::optional<T>::has_value](#stdoptionaltoperator-bool-stdoptionalthas_value)
+- [std::optional](#stdoptional)
+      - [std::optional<T>::value](#stdoptionaltvalue)
+      - [std::optional<T>::value_or](#stdoptionaltvalue_or)
+      - [void reset() noexcept;](#void-reset-noexcept)
+      - [std::optional<T>::swap](#stdoptionaltswap)
+      - [std::make_optional](#stdmake_optional)
+      - [std::optional<T>::emplace](#stdoptionaltemplace)
+      - [std::optional<T>::operator bool, std::optional<T>::has_value](#stdoptionaltoperator-bool-stdoptionalthas_value)
 
 <!-- /code_chunk_output -->
 
