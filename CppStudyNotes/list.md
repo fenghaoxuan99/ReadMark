@@ -147,3 +147,89 @@ int main()
     }
     std::cout 
 ```
+
+
+## 	std::forward_list	
+std::forward_list 是支持从容器中的任何位置快速插入和移除元素的容器。不支持快速随机访问。
+它实现为单链表，且实质上与其在 C 中实现相比无任何开销。与 std::list 相比，此容器在不需要双向迭代时提供更有效地利用空间的存储。
+
+#### std::forward_list<T,Allocator>::emplace_after
+在容器中的指定位置后插入新元素。原位构造元素，即不进行复制或移动操作。
+
+1. template< class... Args >
+iterator emplace_after( const_iterator pos, Args&&... args );
+
+##### 参数
+pos  - 新元素将构造于其后的迭代器
+args - 转发给元素构造函数的参数
+##### 返回值
+指向新元素的迭代器。
+
+```cpp
+int main()
+{
+    std::forward_list<Sum> list;
+ 
+    auto iter = list.before_begin();
+    std::string str{"1"};
+    for (int i{1}, sum{1}; i != 10; sum += i) {
+        iter = list.emplace_after(iter, str, sum);
+        ++i;
+        str += " + " + std::to_string(i);
+    }
+ 
+    for (const Sum& s : list) s.print();
+}
+```
+
+#### std::forward_list<T,Allocator>::insert_after
+1. iterator insert_after( const_iterator pos, const T& value );
+2. iterator insert_after( const_iterator pos, T&& value );
+3. iterator insert_after( const_iterator pos, size_type count, const T& value );
+4. template< class InputIt >
+iterator insert_after( const_iterator pos, InputIt first, InputIt last );
+5. iterator insert_after( const_iterator pos, std::initializer_list<T> ilist );
+
+```cpp
+#include <forward_list>                                                         
+#include <string>                                                               
+#include <iostream>                                                             
+#include <vector>                                                               
+ 
+template<typename T>                                                            
+std::ostream& operator<<(std::ostream& s, const std::forward_list<T>& v) {      
+    s.put('[');                                                                 
+    char comma[3] = {'\0', ' ', '\0'};                                          
+    for (const auto& e : v) {                                                   
+        s << comma << e;                                                        
+        comma[0] = ',';                                                         
+    }                                                                           
+    return s << ']';                                                            
+}                                                                               
+ 
+int main()                                                                      
+{                                                                               
+    std::forward_list<std::string> words {"the", "frogurt", "is", "also", "cursed"};
+    std::cout << "words: " << words << '\n';                                    
+ 
+    // insert_after (2)                                                         
+    auto beginIt = words.begin();                                               
+    words.insert_after(beginIt, "strawberry");                                  
+    std::cout << "words: " << words << '\n';                                    
+ 
+    // insert_after (3)                                                         
+    auto anotherIt = beginIt;                                                   
+    ++anotherIt;                                                                
+    anotherIt = words.insert_after(anotherIt, 2, "strawberry");                 
+    std::cout << "words: " << words << '\n';                                    
+ 
+    // insert_after (4)
+    std::vector<std::string> V = { "apple", "banana", "cherry"};                
+    anotherIt = words.insert_after(anotherIt, V.begin(), V.end());              
+    std::cout << "words: " << words << '\n';                                    
+ 
+    // insert_after (5)                                                         
+    words.insert_after(anotherIt, {"jackfruit", "kiwifruit", "lime", "mango"});
+    std::cout << "words: " << words << '\n';                                    
+}
+```
