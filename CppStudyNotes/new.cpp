@@ -1,42 +1,44 @@
 #include <iostream>
-#include <tuple>
+#include <memory>
 #include <utility>
  
-int add(int first, int second) { return first + second; }
+struct A {
+    A(int&& n) { std::cout << "rvalue overload, n=" << n << "\n"; }
+    A(int& n)  { std::cout << "lvalue overload, n=" << n << "\n"; }
+};
  
-template<typename T>
-T add_generic(T first, T second) { return first + second; }
+class B {
+public:
+    template<class T1, class T2, class T3>
+    B(T1&& t1, T2&& t2, T3&& t3) :
+        a1_{std::forward<T1>(t1)},
+        a2_{std::forward<T2>(t2)},
+        a3_{std::forward<T3>(t3)}
+    {
+    }
  
-auto add_lambda = [](auto first, auto second) { return first + second; };
+private:
+    A a1_, a2_, a3_;
+};
  
-template<typename... Ts>
-std::ostream& operator<<(std::ostream& os, std::tuple<Ts...> const& theTuple)
+template<class T, class U>
+std::unique_ptr<T> make_unique1(U&& u)
 {
-    std::apply
-    (
-        [&os](Ts const&... tupleArgs)
-        {
-            os << '[';
-            std::size_t n{0};
-            ((os << tupleArgs << (++n != sizeof...(Ts) ? ", " : "")), ...);
-            os << ']';
-        }, theTuple
-    );
-    return os;
+    return std::unique_ptr<T>(new T(std::forward<U>(u)));
+}
+ 
+template<class T, class... U>
+std::unique_ptr<T> make_unique2(U&&... u)
+{
+    return std::unique_ptr<T>(new T(std::forward<U>(u)...));
 }
  
 int main()
-{
-    // OK
-    std::cout << std::apply(add, std::pair(1, 2)) << '\n';
+{   
+    auto p1 = make_unique1<A>(2); // 右值
+    int i = 1;
+    auto p2 = make_unique1<A>(i); // 左值
  
-    // 错误：无法推导函数类型
-    // std::cout << std::apply(add_generic, std::make_pair(2.0f, 3.0f)) << '\n'; 
- 
-    // OK
-    std::cout << std::apply(add_lambda, std::pair(2.0f, 3.0f)) << '\n'; 
- 
-    // 进阶示例
-    std::tuple myTuple(25, "Hello", 9.31f, 'c');
-    std::cout << myTuple << '\n';
+    std::cout << "B\n";
+    auto t = make_unique2<B>(2, i, 3);
 }
