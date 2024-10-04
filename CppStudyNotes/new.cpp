@@ -1,16 +1,40 @@
-#include <csignal>
 #include <iostream>
+#include <cstdlib>
  
-void signal_handler(int signal)
+class Static {
+public:
+ 
+    ~Static() 
+    {
+        std::cout << "Static dtor\n";
+    }
+};
+ 
+class Local {
+public:
+    ~Local() 
+    {
+        std::cout << "Local dtor\n";
+    }
+};
+ 
+Static static_variable; // *将*调用此对象的析构函数
+ 
+void atexit_handler()
 {
-    std::cout << "Received signal " << signal << '\n';
+    std::cout << "atexit handler\n";
 }
  
 int main()
 {
-    // 安装信号处理函数
-    std::signal(SIGTERM, signal_handler);
+    
+    const int result = std::atexit(atexit_handler); // 将调用处理函数
+   static  Local local_variable; // 将*不*调用此对象的析构函数
+    if (result != 0) {
+        std::cerr << "atexit registration failed\n";
+        return EXIT_FAILURE;
+    }
  
-    std::cout << "Sending signal " << SIGTERM << '\n';
-    std::raise(SIGTERM);
+    std::cout << "test\n";
+    std::exit(EXIT_FAILURE);
 }
