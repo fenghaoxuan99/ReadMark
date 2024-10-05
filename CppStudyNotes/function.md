@@ -1,5 +1,18 @@
 
 
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+- [std::function](#stdfunction)
+- [std::bind](#stdbind)
+      - [std::is_bind_expression](#stdis_bind_expression)
+        - [成员常量](#成员常量)
+        - [帮助变量模板](#帮助变量模板)
+
+<!-- /code_chunk_output -->
+
+
 
 
 # std::function
@@ -142,4 +155,69 @@ int main()
     std::cout << f4(std::make_shared<Foo>(foo)) << '\n'
               << f4(std::make_unique<Foo>(foo)) << '\n';
 }
+```
+
+
+#### std::is_bind_expression
+若 T 是调用 std::bind 产生的类型，则此模板从 std::true_type 导出。对于任何其他类型，此模板从 std::false_type 导出。
+##### 成员常量
+![alt text](../Image/is_bind_expression.png)
+##### 帮助变量模板
+template< class T >
+inline constexpr bool is_bind_expression_v = is_bind_expression<T>::value
+```cpp
+int main() {
+    // 假设我们有一个 std::bind 表达式
+    auto bound_func = std::bind([](int x, int y) { return x + y; }, 2, 3);
+    // 检查是否是 std::bind 表达式的结果
+    if constexpr (std::is_bind_expression_v<decltype(bound_func)>) {
+        std::cout << "是 std::bind 表达式的结果" << std::endl;
+    } else {
+        // 不是 std::bind 表达式的结果
+    }
+    return 0;
+}
+```
+
+#### std::is_placeholder
+![alt text](../Image/is_placeholder.png)
+```cpp
+ std::cout << "Standard placeholder _5 is for the argument number "
+              << std::is_placeholder<decltype(std::placeholders::_5)>::value
+              << '\n';
+```
+
+# std::mem_fn
+函数模板 std::mem_fn 生成指向成员指针的包装对象，它可以存储、复制及调用指向成员指针。到对象的引用和指针（含智能指针）可在调用 std::mem_fn 时使用。
+std::mem_fn 是 C++ 标准库中的一个函数模板，它用于创建一个指向成员函数的指针，这样可以将成员函数作为参数传递给算法或者其他函数。
+这在需要将成员函数作为回调或者需要存储成员函数指针时非常有用。
+```cpp
+#include <iostream>
+#include <functional>
+#include <vector>
+#include <algorithm>
+
+struct Foo {
+    int value;
+    Foo(int v) : value(v) {}
+    void print() const { std::cout << value << ' '; }
+};
+
+int main() {
+    std::vector<Foo> foos = {Foo(1), Foo(2), Foo(3)};
+    // 使用 std::mem_fn 和 for_each 算法
+    std::for_each(foos.begin(), foos.end(), std::mem_fn(&Foo::print));
+    std::cout << '\n';
+    return 0;
+}
+
+----------------------------------------------------------------
+    auto greet = std::mem_fn(&Foo::display_greeting);
+    greet(&f);
+ 
+    auto print_num = std::mem_fn(&Foo::display_number);
+    print_num(&f, 42);
+ 
+    auto access_data = std::mem_fn(&Foo::data);
+    std::cout << "data: " << access_data(&f) << '\n';
 ```
