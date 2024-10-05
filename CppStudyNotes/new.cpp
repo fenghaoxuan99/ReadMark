@@ -9,7 +9,7 @@ template<class F, class... Args>
 void expand(const F& f, Args&&...args) 
 {
   //这里用到了完美转发
-  initializer_list<int>{(f(std::forward< Args>(args)),0)...};
+  initializer_list<int>{(f(std::forward<Args>(args)),0)...};
 }
 
 
