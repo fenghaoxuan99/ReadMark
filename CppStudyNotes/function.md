@@ -221,3 +221,5 @@ int main() {
     auto access_data = std::mem_fn(&Foo::data);
     std::cout << "data: " << access_data(&f) << '\n';
 ```
+
+
