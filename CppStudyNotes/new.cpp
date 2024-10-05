@@ -1,26 +1,24 @@
-#include <functional>
 #include <iostream>
- 
-
 
 using namespace std;
 
-template<class F, class... Args>
-void expand(const F& f, Args&&...args) 
+
+//展开函数
+template<class ...Args>
+void ShowList(Args... args)
 {
-  //这里用到了完美转发
-  initializer_list<int>{(f(std::forward<Args>(args)),0)...};
+  auto func = [](int val) {cout << val << " "; };
+	int arr[] = {(func(args),0)...  }; //列表初始化
+	//打印参数包中的各个参数
+	
+
 }
-
-
-int main(){
-
-
-
-
-expand([](int i){cout<<i<<endl;}, 1,2,3);
-
-
-return 0;
-
+ 
+int main()
+{
+  ShowList();
+	ShowList(1);
+	ShowList(1, 2);
+	ShowList(1, 2, 3);
+	return 0;
 }
