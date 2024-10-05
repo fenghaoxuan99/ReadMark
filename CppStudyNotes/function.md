@@ -1,5 +1,15 @@
 
 
+
+
+# std::function
+template< class R, class... Args >
+class function<R(Args...)>;
+
+类模板 std::function 是通用多态函数封装器。
+std::function 的实例能存储、复制及调用任何可调用 (Callable) 目标——函数、 lambda 表达式、 bind 表达式或其他函数对象，还有指向成员函数指针和指向数据成员指针。
+
+```cpp{.line-numbers}
 #include <functional>
 #include <iostream>
  
@@ -42,7 +52,7 @@ int main()
     f_add_display(314159, 1);
  
     // 存储到数据成员访问器的调用
-    std::function<int(Foo const&)> f_num = &Foo::num_;
+    std::function<int(const Foo &)> f_num = &Foo::num_;
     std::cout << "num_: " << f_num(foo) << '\n';
  
     // 存储到成员函数及对象的调用
@@ -58,3 +68,4 @@ int main()
     std::function<void(int)> f_display_obj = PrintNum();
     f_display_obj(18);
 }
+```
