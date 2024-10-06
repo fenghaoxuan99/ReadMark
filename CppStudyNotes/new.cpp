@@ -1,24 +1,18 @@
 #include <iostream>
+#include <string>
+#include <sstream>
 
 using namespace std;
 
-
-//展开函数
-template<class ...Args>
-void ShowList(Args... args)
+template<typename... Args>
+void FormatPrint(Args... args)
 {
-  auto func = [](int val) {cout << val << " "; };
-	int arr[] = {(func(args),0)...  }; //列表初始化
-	//打印参数包中的各个参数
-	
-
+    (std::cout << ... << (std::cout << "[" << args, "]")) << std::endl;
 }
- 
-int main()
+
+int main(void)
 {
-  ShowList();
-	ShowList(1);
-	ShowList(1, 2);
-	ShowList(1, 2, 3);
-	return 0;
+   FormatPrint(1, 2, 3, 4);
+   FormatPrint("good", 2, "hello", 4, 110);
+   return 0;
 }
