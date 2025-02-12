@@ -1,3 +1,12 @@
+<!--
+ * @Author: feng 1804831168@qq.com
+ * @Date: 2024-07-17 15:35:58
+ * @LastEditors: feng 1804831168@qq.com
+ * @LastEditTime: 2025-02-12 11:05:28
+ * @Description:
+ * Copyright (c) 2025 by Feng, All Rights Reserved.
+-->
+
 # MPE 使用
 
 ## 空格
@@ -24,14 +33,14 @@ Content [^1]
 
 ## 缩略
 
-_[HTML]: Hyper Text Markup Language
-_[W3C]: World Wide Web Consortium
+\*[HTML]: Hyper Text Markup Language
+\_[W3C]: World Wide Web Consortium
 The HTML specification
 is maintained by the W3C.
 
 ## Admonitions 插件
 
-!!! success This is the admonition title
+!!! note This is the admonition title
 This is the admonition body
 ==**note abstract info tip success question warning failure danger bug example quote**==
 
@@ -46,10 +55,10 @@ This is the admonition body
 度数 (°) — &#176;
 圆周率 (π) — &#960;
 
-> :warning: **Warning:** Do not push the big red button.
+> :button: **Warning:** Do not push the big red button.
 
- :: **Warning:** Do not push the big red button.
+:joy: **Warning:** Do not push the big red button.
 
- :memo: **Note** Sunrises are beautiful.
+:memo: **Note** Sunrises are beautiful.
 
 > :bulb: **Tip:** Remember to appreciate the little things in life.
