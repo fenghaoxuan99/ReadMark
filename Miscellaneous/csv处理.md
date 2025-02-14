@@ -1,11 +1,10 @@
+# CSV 文件
 
+​CSV 代表 Comma Separated Values。CSV 文件是一种纯文本文件，用于存储表格和电子表格信息。内容通常是由文本、数字或日期组成的表格。使用将数据存储在表中的程序可以轻松导入和导出 CSV 文件。
+通常 CSV 文件的第一行包含表格列标签。后面的每一行表示表中的一行。逗号分隔行中的每个单元格，这就是名称的来源。
 
-# CSV文件
+## 通过创建 writer 对象写入
 
-​CSV代表Comma Separated Values。CSV文件是一种纯文本文件，用于存储表格和电子表格信息。内容通常是由文本、数字或日期组成的表格。使用将数据存储在表中的程序可以轻松导入和导出CSV文件。
-通常CSV文件的第一行包含表格列标签。后面的每一行表示表中的一行。逗号分隔行中的每个单元格，这就是名称的来源。
-
-## 通过创建writer对象写入
 ```py
 import csv
 
@@ -23,8 +22,8 @@ with open('person.csv', 'w', encoding='utf-8', newline='') as file_obj:
     for p in person:
         writer.writerow(p)
 ```
-要注意这个newline参数，默认是\n，即换行符，csv文件中每一行的末尾都是\n，所以在写入的时候，会自动加上\n，导致文件中出现空行。
 
+要注意这个 newline 参数，默认是\n，即换行符，csv 文件中每一行的末尾都是\n，所以在写入的时候，会自动加上\n，导致文件中出现空行。
 
 ```py
 import csv
@@ -42,8 +41,8 @@ with open('person.csv', 'w', encoding='utf-8', newline='') as file_obj:
     writer.writerows(person)
 ```
 
+## 通过创建 DictWriter 对象写入
 
-## 通过创建DictWriter对象写入
 ```py
 import csv
 
@@ -65,7 +64,8 @@ with open('person.csv', 'w', encoding='utf-8', newline='') as file_obj:
     dictWriter.writerows(person)
 ```
 
-## 通过reader()读取
+## 通过 reader()读取
+
 ```py
 import csv
 
@@ -76,7 +76,9 @@ with open('person.csv', 'r', encoding='utf-8') as file_obj:
     for r in reader:
         print(r)
 ```
-## 通过DictReader()读取
+
+## 通过 DictReader()读取
+
 ```py
 import csv
 

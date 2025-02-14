@@ -1,6 +1,14 @@
+<!--
+ * @Author: feng 1804831168@qq.com
+ * @Date: 2024-07-10 11:44:50
+ * @LastEditors: feng 1804831168@qq.com
+ * @LastEditTime: 2025-02-12 14:32:52
+ * @Description:
+ * Copyright (c) 2025 by Feng, All Rights Reserved.
+-->
 
+# list 方法
 
-# list方法
 ```py
 函数/方法	                  描述
 len(list)	                 返回列表的长度。

@@ -2,8 +2,8 @@
 
 <!-- code_chunk_output -->
 
-- [Python错误处理](#python错误处理)
-  - [logging模块记录错误信息](#logging模块记录错误信息)
+- [Python 错误处理](#python错误处理)
+  - [logging 模块记录错误信息](#logging模块记录错误信息)
     - [配置日志](#配置日志)
     - [设置日志级别](#设置日志级别)
     - [创建日志记录器](#创建日志记录器)
@@ -13,11 +13,12 @@
 
 <!-- /code_chunk_output -->
 
+# Python 错误处理
 
-# Python错误处理
+## logging 模块记录错误信息
 
-## logging模块记录错误信息
 `logging` 模块提供了灵活的方式来输出日志信息，这些日志信息可以用于监控程序的运行状态、调试程序或记录重要的事件。
+
 ```py
 # err_logging.py
 import logging
@@ -35,6 +36,7 @@ print('END')
 ```
 
 ### 配置日志
+
 可以通过 `logging.basicConfig()` 方法配置日志系统，设置日志级别、日志文件、日志格式等。
 
 ```python
@@ -44,14 +46,17 @@ logging.basicConfig(level    = logging.DEBUG,
                     filename = 'app.log',
                     filemode = 'w' )
 ```
+
 ![alt text](../Image/20200229211824788.png)
-- `level`   : 设置日志级别，如 DEBUG, INFO, WARNING, ERROR, CRITICAL。
-- `format`  : 设置日志的输出格式。
+
+- `level` : 设置日志级别，如 DEBUG, INFO, WARNING, ERROR, CRITICAL。
+- `format` : 设置日志的输出格式。
 - `datefmt` : 设置日期时间格式。
 - `filename`: 设置日志输出到文件的文件名。
 - `filemode`: 设置文件打开模式，'w' 表示写模式，'a' 表示追加模式。
 
 ### 设置日志级别
+
 日志级别从低到高分为：DEBUG, INFO, WARNING, ERROR, CRITICAL。
 
 ```python
@@ -64,12 +69,13 @@ logging.critical("这是一个 critical 级别的日志")
 
 ### 创建日志记录器
 
-|组件	|说明|
-|:--:|:--:|
-|Loggers（日志记录器）	 |提供程序直接使用的接口（基操中的logging.basicConfig()就是配置了此组件）|
-|Handlers（日志处理器）	 |将记录的日志发送到指定的位置（终端打印/保存为文件）|
-|Filters（日志过滤器）	 |用于过滤特定的日志记录|
-|Formatters（日志格式器）|用于控制日志信息的输出格式|
+|           组件           |                                   说明                                   |
+| :----------------------: | :----------------------------------------------------------------------: |
+|  Loggers（日志记录器）   | 提供程序直接使用的接口（基操中的 logging.basicConfig()就是配置了此组件） |
+|  Handlers（日志处理器）  |           将记录的日志发送到指定的位置（终端打印/保存为文件）            |
+|  Filters（日志过滤器）   |                          用于过滤特定的日志记录                          |
+| Formatters（日志格式器） |                        用于控制日志信息的输出格式                        |
+
 ![alt text](../Image/e083e6407cd84c8e872221e8ebc36e58.png)
 可以创建自己的日志记录器，以便在不同的模块中使用。
 
@@ -96,7 +102,9 @@ logger.addHandler(stream_handler)
 ```
 
 ### 记录日志
+
 使用创建的日志记录器记录日志。
+
 ```python
 logger.debug("这是一个 debug 级别的日志")
 logger.info("这是一个 info 级别的日志")
