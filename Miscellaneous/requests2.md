@@ -93,3 +93,5 @@ response.close()  # 手动关闭连接
 4. **资源释放**：使用 `stream=True` 时，需手动调用 `response.close()` 或使用 `with` 语句。
 
 掌握这些参数和返回值特性，可以高效处理 HTTP 请求与响应。
+
+<font color="cyan">dddddd</font>
