@@ -1,6 +1,4 @@
-在 Dear PyGui (DPG) 中，`dpg.push_container_stack()` 和 `dpg.pop_container_stack()` 是用于管理 UI 容器层级关系的重要函数。以下是详细说明：
-
----
+## 在 Dear PyGui (DPG) 中，`dpg.push_container_stack()` 和 `dpg.pop_container_stack()` 是用于管理 UI 容器层级关系的重要函数。
 
 ### **功能概述**
 
