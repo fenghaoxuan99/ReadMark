@@ -7,7 +7,7 @@
  * Copyright (c) 2025 by Feng, All Rights Reserved.
 -->
 
-# list 方法
+### list 方法
 
 ```py
 函数/方法	                  描述
@@ -24,5 +24,5 @@ list.reverse()	             对列表进行反转。
 
 new_elements = [6, 7, 8]
 my_list.extend(new_elements)
-print(my_list)  # 输出: [1, 'apple', True, 3.14, [5, 6, 7], {'name': 'John', 'age': 30}, 6, 7, 8]
+print(my_list)
 ```

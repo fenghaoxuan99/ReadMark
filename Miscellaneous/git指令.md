@@ -82,6 +82,17 @@ git config user.email northcastle_local@163.com
 git status
 ```
 
+撤销工作区修改
+BASH
+
+```py
+- 放弃单个文件修改
+git restore filename.txt
+
+- 放弃所有修改
+git restore .
+```
+
 ### 将文件从暂存区中剔除掉
 
 ```py
@@ -127,7 +138,9 @@ git pull <远程主机名> <远程分支名>:<本地分支名>
 ### 分支版本上传到远程并合并
 
 ```
-git push <远程主机名> <本地分支名>:<远程分支名>
+git push    <远程主机名> <本地分支名>:<远程分支名>
+git push -f <远程主机名> <本地分支名>:<远程分支名>
+git push -u <远程主机名> <本地分支名>:<远程分支名>
 ```
 
 ## 分支管理
@@ -136,6 +149,8 @@ git push <远程主机名> <本地分支名>:<远程分支名>
 
 ```
 git branch
+git branch -m old-name new-name   // 修改分支名
+
 ```
 
 ### 切换分支
@@ -154,6 +169,7 @@ git checkout -b <branch>
 
 ```
 git branch -d <branch>
+git branch -D branch-name // 强制删除
 ```
 
 ### 合并分支
@@ -178,6 +194,7 @@ git tag 标签名称 提交版本号
 git tag -a 标签名称 -m 附注信息
 git tag -a 标签名称 提交版本号 -m 附注信息
 
+git show v1.0
 说明：
 -a : 理解为 annotated 的首字符，表示附注标签
 -m : 指定附注信息
@@ -233,14 +250,14 @@ git checkout -b 分支名称 标签名称
       比如 git log --oneline -n 3    : 即一行一行的展示+只展示最近的3次提交记录;
       比如 git log --oneline --graph : 即一行一行的展示+展示提交的路线;
 
-6.git reflog : 展示短hash+HEAD{n}+提交备注，非常方便用来进行历史版本的回退与任意版本的切换；
+6.git reflog      : 展示短hash+HEAD{n}+提交备注，非常方便用来进行历史版本的回退与任意版本的切换；
 7.git reflog -n 2 : 表示只看最近的两次提交
 
 【注】 git log 和 git reflog 的区别：
             git log    : 只展示 当前版本之前的版本，即HEAD指针指向的版本及之前的历史版本；
             git reflog : 会展示所有的历史提交版本，非常的全。
 
-8.git log --stat : 可以查看历史提交的改动的文件
+8.q : 可以查看历史提交的改动的文件
 ```
 
 ### git 版本回退命令

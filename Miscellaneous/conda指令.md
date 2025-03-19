@@ -26,9 +26,9 @@
 
 ## 创建虚拟环境
 
-conda create --name env_name
-conda create --name env_name python=3.6 # 创建指定 python 版本
-conda create --name env_name python=3.6 pandas numpy scipy # 创建指定 python 版本下包含某些包
+- conda create --name env_name
+- conda create --name env_name python=3.6 # 创建指定 python 版本
+- conda create --name env_name python=3.6 pandas numpy scipy # 创建指定 python 版本下包含某些包
 
 ## 激活/使用/进入某个虚拟环境
 
@@ -63,9 +63,9 @@ conda list -n env_name -v
 
 ## 安装或卸载包(进入虚拟环境之后)
 
-conda install requests
-conda install xx = 版本号 # 指定版本号
-conda install xxx -i 源名称或链接 # 指定下载源
+conda install   requests
+conda install   xx = 版本号 # 指定版本号
+conda install   xxx -i 源名称或链接 # 指定下载源
 conda uninstall xxx
 
 ## 分享虚拟环境
@@ -96,10 +96,10 @@ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/
 |       名称       |                   地址                    |
 | :--------------: | :---------------------------------------: |
 |      阿里云      |  http://mirrors.aliyun.com/pypi/simple/   |
-|   中国科技大学   | https://pypi.mirrors.ustc.edu.cn/simple/  |
+|   中国科技大学    | https://pypi.mirrors.ustc.edu.cn/simple/  |
 |   豆瓣(douban)   |      http://pypi.douban.com/simple/       |
 |     清华大学     | https://pypi.tuna.tsinghua.edu.cn/simple/ |
-| 中国科学技术大学 |  http://pypi.mirrors.ustc.edu.cn/simple/  |
+| 中国科学技术大学   |  http://pypi.mirrors.ustc.edu.cn/simple/  |
 
 ## 升级
 
