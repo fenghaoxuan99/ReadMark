@@ -1,41 +1,40 @@
-#include <cassert>
-#include <forward_list>
+#include <iostream>
+#include <set>
+
+struct LightKey
+{
+    int x;
+};
+
+struct FatKey
+{
+    int x;
+    int data[1000]; // a heavy blob
+};
+
+// As detailed above, the container must use std::less<> (or other transparent
+// Comparator) to access these overloads. This includes standard overloads,
+// such as comparison between std::string and std::string_view.
+bool operator<(const FatKey &fk, const LightKey &lk) { return fk.x < lk.x; }
+bool operator<(const LightKey &lk, const FatKey &fk) { return lk.x < fk.x; }
+bool operator<(const FatKey &fk1, const FatKey &fk2) { return fk1.x < fk2.x; }
 
 int main()
 {
-    using F = std::forward_list<int>;
+    // Simple comparison demo.
+    std::set<int> example{1, 2, 3, 4};
 
-    // Demonstrate the meaning of open range (first, last)
-    // in overload (5): the first element of l1 is not moved.
-    F l1 = {1, 2, 3, 4, 5};
-    F l2 = {10, 11, 12};
+    if (auto search = example.find(2); search != example.end())
+        std::cout << "Found " << (*search) << '\n';
+    else
+        std::cout << "Not found\n";
 
-    l2.splice_after(l2.cbegin(), l1, l1.cbegin(), l1.cend());
-    // Not equivalent to l2.splice_after(l2.cbegin(), l1);
-    // which is equivalent to
-    // l2.splice_after(l2.cbegin(), l1, l1.cbefore_begin(), l1.end());
+    // Transparent comparison demo.
+    std::set<FatKey, std::less<>> example2{{1, {}}, {2, {}}, {3, {}}, {4, {}}};
 
-    assert((l1 == F{1}));
-    assert((l2 == F{10, 2, 3, 4, 5, 11, 12}));
-
-    // Overload (1)
-    F x = {1, 2, 3, 4, 5};
-    F y = {10, 11, 12};
-    x.splice_after(x.cbegin(), y);
-    assert((x == F{1, 10, 11, 12, 2, 3, 4, 5}));
-    assert((y == F{}));
-
-    // Overload (3)
-    x = {1, 2, 3, 4, 5};
-    y = {10, 11, 12};
-    x.splice_after(x.cbegin(), y, y.cbegin());
-    assert((x == F{1, 11, 2, 3, 4, 5}));
-    assert((y == F{10, 12}));
-
-    // Overload (5)
-    x = {1, 2, 3, 4, 5};
-    y = {10, 11, 12};
-    x.splice_after(x.cbegin(), y, y.cbegin(), y.cend());
-    assert((x == F{1, 11, 12, 2, 3, 4, 5}));
-    assert((y == F{10}));
+    LightKey lk = {2};
+    if (auto search = example2.find(lk); search != example2.end())
+        std::cout << "Found " << search->x << '\n';
+    else
+        std::cout << "Not found\n";
 }
