@@ -3,7 +3,7 @@
 
 <!-- code_chunk_output -->
 
-- [string 的基本概念](#string-的基本概念)
+  - [string 的基本概念](#string-的基本概念)
   - [string 的赋值操作](#string-的赋值操作)
   - [string 的字符串拼接操作](#string-的字符串拼接操作)
   - [string 的查找和替换](#string-的查找和替换)
@@ -15,7 +15,7 @@
 
 
 # string 的基本概念
-string 是 c++ 的字符串，本质是一个类；
+**string 是 c++ 的字符串，本质是一个类,是一个封装容器！**
 char* 是一个指针，而 string 是类， 类内封装 char*，管理 char*，使用 string 不用担心字符越界问题，因为这都是类内管理好的了。
 
 |构造函数的原型|功能|
@@ -81,15 +81,31 @@ char* 是一个指针，而 string 是类， 类内封装 char*，管理 char*�
 |int rfind(const char* s, int pos, int n) const	    |从pos查找s的前n个字符最后一次位置|
 |int rfind(const char c, int pos = 0) const	        |查找字符c最后一次出现位置|
 |string& replace(int pos, int n, const string& str)	|替换从pos开始n个字符为字符串str|
-|string& replace(int pos, int n,const char* s)	    |替换从pos开始的n个字符为字符串s|
+|string& replace(int pos, int n, const char* s)	    |替换从pos开始的n个字符为字符串s|
 |string& replace(size_t pos, size_t n, size_t n1, char c);  |将当前字符串从pos索引开始的n个字符，替换成n1个字符c|
 |string& replace(iterator i1, iterator i2, const char* s);  |将当前字符串[i1,i2)区间中的字符串替换为字符串s|
+
+
+find函数是全匹配，rfind是反向匹配。
+
+**寻找等于给定字符序列中字符之一的首个字符。搜索只考虑区间 [pos, size()) 。若区间中不存在字符，则返回 npos 。**
+
+#### size_type find_first_of( const CharT* s, size_type pos, size_type count ) const;
+==寻找等于范围 [s, s+count) 中字符中字符之一的首个字符。此范围能包含空字符== 注意这里是寻找范围，而不是字符串。
+
+
 
 ## string 的字符获取操作
 |函数原型	|功能|
 |:--:|--|
 |char& operator[](int n)	|重载[ ],获取第 n 个索引string 对象的字符|
 |char& at(int n)            |同上功能|
+
+### std::basic_string<CharT,Traits,Allocator>::substr
+- basic_string substr( size_type pos = 0, size_type count = npos ) const;           (C++20 前)
+- constexpr basic_string substr( size_type pos = 0, size_type count = npos ) const; (C++20 起)
+ 返回子串 [pos, pos+count) 。若请求的子串越过 string 的结尾，或若 count == npos ，则返回的子串为 [pos, size()) 
+
 
 ```cpp
 void test01()
@@ -124,6 +140,20 @@ void test01()
 |string& insert(int pos, const string& str)	|从pos位置插入字符串str|
 |string& insert(int pos, int n, char c)	    |从pos位置插入n字符串c|
 |string& erase (int pos, int n = npos)      |从 pos开始删除n个字符|
+```cpp
+basic_string& insert(size_type pos, const basic_string& str, 
+                    size_type subpos, size_type sublen = npos);
+```
+作用：在位置 pos 前插入 str 的子串，子串从 subpos 开始，长度为 sublen。
+参数：
+
+- pos：插入位置。
+- str：源字符串。
+- subpos：子串起始位置。
+- sublen：子串长度（默认为 npos，即到字符串末尾）。
+
+
+
 
 ## string的大小和容量
 1. size()和length()：返回string对象的字符个数，他们执行效果相同。
@@ -135,11 +165,12 @@ void test01()
 
 1. to_string()：将其他类型转换为string类型
 2. 通过 ostringstream 转换
+```cpp 
     int num = 123;
     std::ostringstream ss;
     ss << num;
     ss.str();
-    
+```    
 ### 转为int类型
 1.  std::string str = "668";
     int num = 0;
@@ -157,8 +188,8 @@ strcpy(c,s.c_str());将数据进行拷贝。
 std::stoi, std::stol, std::stoll
 std::stoul, std::stoull
 ===
-int       stoi( const std::string& str, std::size_t* pos = 0, int base = 10 );
-int       stoi( const std::wstring& str, std::size_t* pos = 0, int base = 10 );
+1. int       stoi( const std::string& str, std::size_t* pos = 0, int base = 10 );
+2. int       stoi( const std::wstring& str, std::size_t* pos = 0, int base = 10 );
 
 long      stol( const std::string& str, std::size_t* pos = 0, int base = 10 );
 long      stol( const std::wstring& str, std::size_t* pos = 0, int base = 10 );
@@ -183,5 +214,4 @@ constexpr size_type copy( CharT* dest, size_type count, size_type pos = 0 ) cons
 
 #### std::hash (std::string)
   std::cout << std::hash<std::string>{}(s) << '\n';
-
 

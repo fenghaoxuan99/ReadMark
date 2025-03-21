@@ -8,12 +8,13 @@
 <!-- /code_chunk_output -->
 
 # std::function
-
+```cpp
 template< class R, class... Args >
 class function<R(Args...)>;
-
+```
 类模板 std::function 是通用多态函数封装器。
 std::function 的实例能存储、复制及调用任何可调用 (Callable) 目标——函数、 lambda 表达式、 bind 表达式或其他函数对象，还有指向成员函数指针和指向数据成员指针。
+
 
 ```cpp{.line-numbers}
 #include <functional>

@@ -15,7 +15,7 @@
 |调用时构造函数原型	|功能描述|
 |:--:|--|
 |vector< T > v	                 |类模板的方式，默认构造|
-|vector< T > v1(v.begin, v.end)	 |将v[begin(), end())区间中的元素拷贝给v1,注意是左闭右开区间|
+|vector< T > v1(v.begin, v.end)	 |将v[begin(), end())区间中的元素拷贝给v1|
 |vector< T > v(n,elem)           |构造函数将n个elem拷贝给v|
 |vector< T > v(const vector &vec)|将 vec 容器拷贝到 v|
 
@@ -122,5 +122,102 @@ void test02()
 
 但是，需要注意的是，这种写法在某些情况下可能不会达到预期效果，特别是当 vector 被用作其他容器的元素或者作为对象成员时。这是因为 swap 函数可能会违反对象的所有权规则。正确的内存收缩方法应该是直接调用 vector 的 shrink_to_fit 方法，如果编译器支持 C++11 或更高版本的话
 
-## reserve(int size) 预留size个空间。
+### reserve(int size) 预留size个空间。
 功能：在提前知道数据大小的情况下，使用reserve函数能够预留出你需要的空间，减少了动态扩容时候开辟空间的次数
+
+
+
+
+### `std::vector<T, Allocator>::emplace` 用于在指定位置直接构造元素，避免临时对象的拷贝或移动：
+
+### 函数原型
+```cpp
+template< class... Args >
+iterator emplace(const_iterator pos, Args&&... args);
+```
+- **参数**：
+  - `pos` ：插入位置的常量迭代器（新元素插入在 `pos` 之前）。
+  - `args`：传递给元素类型构造函数的参数。
+- **返回值**：指向新插入元素的迭代器。
+
+### 关键特性
+1. **直接构造**：元素在容器内存中直接构造，无需创建临时对象。
+2. **参数转发**：使用完美转发（perfect forwarding）传递参数给构造函数。
+3. **迭代器失效**：插入操作可能导致迭代器失效（如触发重新分配）。
+
+### 示例代码
+```cpp
+#include <vector>
+#include <string>
+#include <iostream>
+
+struct Person {
+    std::string name;
+    int age;
+    // 构造函数
+    Person(std::string n, int a) : name(std::move(n)), age(a) {
+        std::cout << "构造Person: " << name << std::endl;
+    }
+    // 拷贝构造函数（示例用）
+    Person(const Person& other) : name(other.name), age(other.age) {
+        std::cout << "拷贝Person: " << name << std::endl;
+    }
+};
+
+int main() {
+    std::vector<Person> people;
+
+    // 使用 emplace_back 在末尾直接构造
+    people.emplace_back("Alice", 30); // 输出：构造Person: Alice
+
+    // 在开头插入
+    auto it = people.emplace(people.begin(), "Bob", 25); // 输出：构造Person: Bob
+
+    // 在第二个位置插入（当前是 Alice 的位置）
+    people.emplace(people.begin() + 1, "Charlie", 40); // 输出：构造Person: Charlie
+
+    // 输出结果
+    std::cout << "\n最终vector内容：" << std::endl;
+    for (const auto& p : people) {
+        std::cout << p.name << " (" << p.age << ")" << std::endl;
+    }
+
+    return 0;
+}
+```
+
+### 输出结果
+```
+构造Person: Alice
+构造Person: Bob
+构造Person: Charlie
+
+最终vector内容：
+Bob (25)
+Charlie (40)
+Alice (30)
+```
+
+### 代码解析
+1. **直接构造**：`emplace` 直接调用 `Person` 的构造函数，输出中只有“构造Person”，没有拷贝操作。
+2. **插入位置**：
+   - `emplace_back` 在末尾插入 Alice。
+   - `emplace(people.begin(), ...)` 在开头插入 Bob。
+   - `emplace(people.begin() + 1, ...)` 在 Bob 和 Alice 之间插入 Charlie。
+3. **效率优势**：避免了拷贝构造，适合复杂对象或频繁插入场景。
+
+### 对比 `insert`
+- `insert` 需要现有对象：
+  ```cpp
+  people.insert(people.begin(), Person("Bob", 25)); // 触发拷贝构造
+  ```
+  输出：
+  ```
+  构造Person: Bob (临时对象)
+  拷贝Person: Bob (拷贝到容器)
+  ```
+
+### 注意事项
+- **参数匹配**：确保 `Args` 与元素构造函数匹配。
+- **迭代器失效**：插入后避免使用旧的迭代器。
+- **异常安全**：若构造函数抛出异常，容器保持原有状态。

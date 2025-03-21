@@ -1,10 +1,11 @@
 
 # set 和 multiset容器的基本概念
 - 概念：
-set 容器 为集合；multiset 也是集合；插入数据时候默认按升序排列。
+set 容器 为集合；multiset 也是集合；
+**插入数据时候默认按升序排列。**
 
 - 说明：
-set 和 multiset 的操作基本一致，区别在于，set容器不可以有重复的数据，而multiset可以又重复的数据；
+set 和 multiset 的操作基本一致，区别在于，set容器不可以有重复的数据，而multiset可以重复的数据；
 即使你插入的数据是无序序列，set容器也会自动帮你排好顺序；
 set 容器插入时候没有push_back()的操作，只有insert（）的操作；
 

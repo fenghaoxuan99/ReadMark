@@ -32,7 +32,7 @@
 - transform
 
 ### for_each 函数
-for_each（iterator begin,iterator end,_func）	
+**for_each（iterator begin,iterator end, _func**	
 解释参数：
 - begin为容器的起始迭代器，
 - end为容器的结束迭代器，
