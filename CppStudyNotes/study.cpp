@@ -1,40 +1,14 @@
 #include <iostream>
-#include <set>
-
-struct LightKey
-{
-    int x;
-};
-
-struct FatKey
-{
-    int x;
-    int data[1000]; // a heavy blob
-};
-
-// As detailed above, the container must use std::less<> (or other transparent
-// Comparator) to access these overloads. This includes standard overloads,
-// such as comparison between std::string and std::string_view.
-bool operator<(const FatKey &fk, const LightKey &lk) { return fk.x < lk.x; }
-bool operator<(const LightKey &lk, const FatKey &fk) { return lk.x < fk.x; }
-bool operator<(const FatKey &fk1, const FatKey &fk2) { return fk1.x < fk2.x; }
+#include <iterator>
+#include <utility>
+#include <vector>
+#include <cassert>
 
 int main()
 {
-    // Simple comparison demo.
-    std::set<int> example{1, 2, 3, 4};
+         // error: assert does not take two arguments
+    assert((std::is_same_v<int, int>));      // OK: one argument
+    static_assert(std::is_same_v<int, int>); // OK: not a macro
 
-    if (auto search = example.find(2); search != example.end())
-        std::cout << "Found " << (*search) << '\n';
-    else
-        std::cout << "Not found\n";
-
-    // Transparent comparison demo.
-    std::set<FatKey, std::less<>> example2{{1, {}}, {2, {}}, {3, {}}, {4, {}}};
-
-    LightKey lk = {2};
-    if (auto search = example2.find(lk); search != example2.end())
-        std::cout << "Found " << search->x << '\n';
-    else
-        std::cout << "Not found\n";
+    
 }

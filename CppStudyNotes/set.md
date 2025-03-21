@@ -1,4 +1,9 @@
 
+map ,multimap ,set multiset 都是自动排序的，map 是 key-value 键值对，set 是 key 键值。
+map 中所有元素都是 pair，pair 中第一个元素是 key（键值），起到索引作用，第二个元素为 value（实值）。所有元素都会根据元素的键值自动排序。
+set 中所有元素都是 value（实值），且不允许有重复的值。
+
+
 # Set容器的基本概念
 - 概念：
 set 容器 为集合；
