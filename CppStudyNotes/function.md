@@ -3,7 +3,12 @@
 <!-- code_chunk_output -->
 
 - [std::function](#stdfunction)
-- [std::bind](#stdbind) - [std::is_bind_expression](#stdis_bind_expression) - [成员常量](#成员常量) - [帮助变量模板](#帮助变量模板)
+- [std::bind](#stdbind)
+      - [std::is_bind_expression](#stdis_bind_expression)
+        - [成员常量](#成员常量)
+        - [帮助变量模板](#帮助变量模板)
+      - [std::is_placeholder](#stdis_placeholder)
+- [std::mem_fn](#stdmem_fn)
 
 <!-- /code_chunk_output -->
 
@@ -13,7 +18,34 @@ template< class R, class... Args >
 class function<R(Args...)>;
 ```
 类模板 std::function 是通用多态函数封装器。
-std::function 的实例能存储、复制及调用任何可调用 (Callable) 目标——函数、 lambda 表达式、 bind 表达式或其他函数对象，还有指向成员函数指针和指向数据成员指针。
+std::function 的实例能存储、复制及调用任何可调用 (Callable) 
+目标——函数、 lambda 表达式、 bind 表达式或其他函数对象，还有指向成员函数指针和指向数据成员指针。
+
+```cpp{.line-numbers}
+#include <iostream>
+#include <functional>
+
+int main() {
+    // 存储 Lambda
+    std::function<int(int, int)> func = [](int a, int b) { return a + b; };
+    std::cout << func(2, 3) << std::endl; // 输出 5
+
+    // 存储成员函数
+    struct Calculator {
+        int multiply(int a, int b) { return a * b; }
+    };
+    Calculator calc;
+    std::function<int(Calculator&, int, int)> member_func = &Calculator::multiply;
+    std::cout << member_func(calc, 4, 5) << std::endl; // 输出 20
+
+    // 存储成员变量（需通过对象访问）
+    struct Point { int x; int y; };
+    Point p{10, 20};
+    std::function<int(Point&)> get_x = &Point::x;
+    std::cout << get_x(p) << std::endl; // 输出 10
+}
+
+```
 
 
 ```cpp{.line-numbers}
@@ -78,10 +110,26 @@ int main()
 ```
 
 # std::bind
-
-1. template< class R, class F, class... Args >
+```cpp
+ template< class R, class F, class... Args >
    /_unspecified_/ bind( F&& f, Args&&... args );
    函数模板 bind 生成 f 的转发调用包装器。调用此包装器等价于以一些绑定到 args 的参数调用 f 。
+```
+std::bind 是 C++11 引入的函数适配器，用于将可调用对象（函数、成员函数、函数对象等）与部分参数绑定，生成一个新的可调用对象。它支持参数的部分绑定、顺序调整和值/引用传递控制，常用于延迟调用或参数适配。
+
+#### 占位符（Placeholders）
+占位符定义在命名空间 std::placeholders 中，表示调用时提供的参数位置：
+
+**_1：对应调用时的第一个参数。**
+**_2：对应调用时的第二个参数，依此类推。**
+
+
+### 绑定成员变量
+直接访问成员变量（返回引用）：
+```cpp
+auto bind_x = std::bind(&Point::x, &p);
+std::cout << bind_x(); // 输出 p.x 的值
+```
 
 ```cpp
 #include <random>

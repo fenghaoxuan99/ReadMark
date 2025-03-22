@@ -1,10 +1,11 @@
 
 
 # std::invoke 
-std::invoke 是 C++17 标准中引入的一个模板函数，它用于以最直观的方式调用给定的可调用对象（函数、函数指针、成员函数指针、std::function、lambda 表达式等）。这个函数的目的是提供一个统一的接口来调用不同类型的可调用对象，而不需要关心它们的具体类型。
+std::invoke 是 C++17 标准中引入的一个模板函数，它用于以最直观的方式调用给定的
+**可调用对象（函数、函数指针、成员函数指针、std::function、lambda 表达式等）。**
+这个函数的目的是提供一个统一的接口来调用不同类型的可调用对象，而不需要关心它们的具体类型。
 
 ### 语法
-
 ```cpp
 template< class F, class... Args >
 invoke_result_t<F, Args...> invoke( F&& f, Args&&... args );
@@ -15,8 +16,26 @@ invoke_result_t<F, Args...> invoke( F&& f, Args&&... args );
 - `invoke_result_t` 是调用结果的类型，它是 `std::invoke_result` 类型的别名。
 
 ### 使用示例
+**核心示例：**
+```cpp
+struct X {
+    int data = 100;
+    void print(int add) { std::cout << data + add << std::endl; }
+};
 
-以下是 `std::invoke` 的一些使用示例：
+int main() {
+    X x;
+    // 调用成员函数
+    std::invoke(&X::print, x, 50);    // 输出 150
+    // 访问成员变量
+    int d = std::invoke(&X::data, x); // d = 100
+}
+```
+通过 `std::invoke`，可以统一处理函数、成员函数、成员变量等调用方式，显著提升泛型代码的灵活性和简洁性。
+
+
+
+
 
 #### 调用普通函数
 
@@ -36,6 +55,8 @@ int main() {
 
 #### 调用成员函数
 
+**第一个参数为对象实例（对象、指针、引用或 std::reference_wrapper）**
+
 ```cpp
 #include <iostream>
 #include <functional>
@@ -48,10 +69,27 @@ struct Foo {
 
 int main() {
     Foo foo;
-    std::invoke(&Foo::bar, foo, 42); // 输出: 42
+    
+    std::invoke(&Foo::bar, foo, 42);           // 输出: 42
+    std::invoke(&Foo::bar, &foo, 12);          // 输出: 42
+    std::invoke(&Foo::bar, std::ref(foo), 12); // 输出: 42
     return 0;
 }
 ```
+
+
+#### 成员变量
+返回成员变量的引用：
+
+```CPP
+struct Z { int val; };
+Z z{10};
+int v = std::invoke(&Z::val, z); // v = 10
+```
+
+
+
+
 
 #### 调用成员函数指针
 
@@ -71,6 +109,24 @@ int main() {
     return 0;
 }
 ```
+#### 在泛型编程中的应用
+统一处理可调用对象，无需针对类型编写特化代码：
+
+```CPP
+template<typename Callable, typename... Args>
+auto callAndLog(Callable&& func, Args&&... args) {
+    auto result = std::invoke(std::forward<Callable>(func), 
+                              std::forward<Args>(args)...);
+    std::cout << "Result: " << result << std::endl;
+    return result;
+}
+
+// 可调用任何函数、成员函数或成员变量
+callAndLog(foo, 42);
+callAndLog(&Y::meth, y, 42);
+callAndLog(&Z::val, z);
+```
+
 
 #### 调用 std::function
 
