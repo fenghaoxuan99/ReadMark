@@ -237,33 +237,149 @@ int main() {
 std::mem_fn 是 C++ 标准库中的一个函数模板，它用于创建一个指向成员函数的指针，这样可以将成员函数作为参数传递给算法或者其他函数。
 这在需要将成员函数作为回调或者需要存储成员函数指针时非常有用。
 
-```cpp
-#include <iostream>
-#include <functional>
-#include <vector>
-#include <algorithm>
 
-struct Foo {
-    int value;
-    Foo(int v) : value(v) {}
-    void print() const { std::cout << value << ' '; }
+std::mem_fn 是 C++ 标准库 <functional> 头文件中提供的一个工具函数，用于将类的成员函数或成员变量包装成一个可调用对象（函数对象）。
+它使得非静态成员可以像普通函数一样被调用，尤其在需要将成员函数传递给算法（如 for_each、transform）或与标准库组件（如 bind、thread）配合使用时非常有用。
+
+核心功能
+将成员函数转换为可调用对象
+允许将类的成员函数包装成独立函数对象，调用时需传入对象实例（或指针、引用）。
+
+支持成员变量
+也可以包装成员变量，调用时返回该成员的引用，支持读写操作
+
+#include <functional>
+auto mem_fn_wrapper = std::mem_fn(PM pm);
+PM 是成员指针类型（如 ReturnType (Class::*)(Args...) 或 DataType Class::*）。
+pm 是成员函数或成员变量的指针（如 &ClassName::member）。
+
+
+
+
+
+
+#### std::mem_fn 生成的包装器支持多种对象传递形式：
+`std::mem_fn` 是 C++ 标准库 `<functional>` 头文件中提供的一个工具函数，用于将类的**成员函数**或**成员变量**包装成一个可调用对象（函数对象）。它使得非静态成员可以像普通函数一样被调用，尤其在需要将成员函数传递给算法（如 `for_each`、`transform`）或与标准库组件（如 `bind`、`thread`）配合使用时非常有用。
+
+---
+
+### **核心功能**
+1. **将成员函数转换为可调用对象**  
+   允许将类的成员函数包装成独立函数对象，调用时需传入对象实例（或指针、引用）。
+   
+2. **支持成员变量**  
+   也可以包装成员变量，调用时返回该成员的引用，支持读写操作。
+
+---
+
+### **基本用法**
+#### 语法
+```cpp
+#include <functional>
+auto mem_fn_wrapper = std::mem_fn(PM pm);
+```
+- `PM` 是成员指针类型（如 `ReturnType (Class::*)(Args...)` 或 `DataType Class::*`）。
+- `pm` 是成员函数或成员变量的指针（如 `&ClassName::member`）。
+
+---
+
+### **示例场景**
+#### 1. 包装成员函数
+```cpp
+class Test {
+public:
+    void print() const { std::cout << "Hello" << std::endl; }
+    int add(int x) { return value + x; }
+    int value = 10;
 };
 
-int main() {
-    std::vector<Foo> foos = {Foo(1), Foo(2), Foo(3)};
-    // 使用 std::mem_fn 和 for_each 算法
-    std::for_each(foos.begin(), foos.end(), std::mem_fn(&Foo::print));
-    std::cout << '\n';
-    return 0;
-}
+// 包装成员函数
+auto print_fn = std::mem_fn(&Test::print);
+auto add_fn   = std::mem_fn(&Test::add);
 
-----------------------------------------------------------------
-    auto greet = std::mem_fn(&Foo::display_greeting);
-    greet(&f);
-
-    auto print_num = std::mem_fn(&Foo::display_number);
-    print_num(&f, 42);
-
-    auto access_data = std::mem_fn(&Foo::data);
-    std::cout << "data: " << access_data(&f) << '\n';
+Test obj;
+print_fn(obj);      // 输出 "Hello"
+int result = add_fn(obj, 5); // 调用 obj.add(5), result = 15
 ```
+
+#### 2. 包装成员变量
+```cpp
+auto value_fn = std::mem_fn(&Test::value);
+Test obj;
+value_fn(obj) = 20;           // 修改 obj.value = 20
+std::cout << value_fn(obj);   // 输出 20
+```
+
+#### 3. 与 STL 算法结合
+```cpp
+std::vector<Test> objects = {Test(), Test(), Test()};
+
+// 对所有对象调用 print()
+std::for_each(objects.begin(), objects.end(), std::mem_fn(&Test::print));
+
+// 提取所有对象的 value 成员
+std::vector<int> values;
+std::transform(objects.begin(), objects.end(), std::back_inserter(values),
+               std::mem_fn(&Test::value)); // values = [20, 20, 20]
+```
+
+---
+
+### **调用方式**
+`std::mem_fn` 生成的包装器支持多种对象传递形式：
+- **对象实例**：`fn(obj, args...)`
+- **对象指针**：`fn(&obj, args...)`
+- **引用包装器**：`fn(std::ref(obj), args...)`
+- **智能指针**：`fn(std::make_shared<Test>(), args...)`
+
+```cpp
+Test obj;
+auto fn = std::mem_fn(&Test::print);
+
+fn(obj);        // 直接传递对象
+fn(&obj);       // 传递指针
+fn(std::ref(obj)); // 传递引用包装器
+```
+
+---
+
+### **对比其他工具**
+1. **`std::bind`**  
+   `bind` 需要显式绑定对象实例，而 `mem_fn` 延迟对象传递，更灵活：
+   ```cpp
+   // 使用 bind（需提前绑定对象）
+   auto bind_fn = std::bind(&Test::print, &obj);
+   bind_fn();  // 调用 obj.print()
+
+   // 使用 mem_fn（调用时传递对象）
+   auto mem_fn = std::mem_fn(&Test::print);
+   mem_fn(obj); // 调用 obj.print()
+   ```
+
+2. **Lambda 表达式**  
+   Lambda 更灵活但代码略长，`mem_fn` 更简洁：
+   ```cpp
+   // Lambda 方式
+   std::for_each(objects.begin(), objects.end(), [](const auto& obj) { obj.print(); });
+
+   // mem_fn 方式
+   std::for_each(objects.begin(), objects.end(), std::mem_fn(&Test::print));
+   ```
+
+---
+
+### **注意事项**
+1. **成员指针语法**  
+   必须用 `&ClassName::Member` 获取成员指针，且成员必须为非静态。
+
+2. **参数匹配**  
+   成员函数的参数需与调用时传递的参数一致。例如：
+   ```cpp
+   // 成员函数：int add(int x)
+   add_fn(obj, 5); // 正确
+   add_fn(obj);    // 错误：缺少参数
+   ```
+
+3. **兼容性**  
+   `std::mem_fn` 自 C++11 起支持，需编译器兼容。
+
