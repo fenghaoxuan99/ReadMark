@@ -114,7 +114,7 @@ node_type extract( const Key& k );
 节点句柄是移动专属类型（move-only），支持以下操作：
 
 操作	说明
-bool empty() const	检查节点句柄是否为空（未包含元素）。
+bool     empty() const	检查节点句柄是否为空（未包含元素）。
 explicit operator bool()	转换为布尔值，判断节点是否有效（等价于 !empty()）。
 value_type& value()	访问节点中的元素（需确保节点非空）。
 

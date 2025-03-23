@@ -88,9 +88,6 @@ int v = std::invoke(&Z::val, z); // v = 10
 ```
 
 
-
-
-
 #### 调用成员函数指针
 
 ```cpp

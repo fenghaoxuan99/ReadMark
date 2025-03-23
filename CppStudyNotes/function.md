@@ -335,8 +335,8 @@ std::transform(objects.begin(), objects.end(), std::back_inserter(values),
 Test obj;
 auto fn = std::mem_fn(&Test::print);
 
-fn(obj);        // 直接传递对象
-fn(&obj);       // 传递指针
+fn(obj);           // 直接传递对象
+fn(&obj);          // 传递指针
 fn(std::ref(obj)); // 传递引用包装器
 ```
 

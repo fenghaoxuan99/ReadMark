@@ -1,26 +1,30 @@
 
 
 
-
-
-
-
 # std::greater
+
 #### std::greater::operator()
+```cpp
 constexpr bool operator()(const T &lhs, const T &rhs) const 
 {
     return lhs > rhs;
 }
-检查 lhs 是否大于 rhs 。
+```
+**检查 lhs 是否大于 rhs**
 
 
 # std::less
 #### std::less::operator()
+```cpp
 constexpr bool operator()(const T &lhs, const T &rhs) const 
 {
     return lhs < rhs;
 }
-检查 lhs 是否小于 rhs 。
+```
+**检查 lhs 是否小于 rhs**
+
+
+
 ```cpp
 #include <functional>
 #include <iostream>
