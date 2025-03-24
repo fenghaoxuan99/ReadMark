@@ -64,7 +64,7 @@ enum class EnumName {
 - **无隐式类型转换**：不能直接将枚举值转换为整数，需显式转换。
   ```cpp
   Color c = Color::Red;
-  // int i = c;              // 错误
+  // int i = c;                // 错误
   int i = static_cast<int>(c); // 正确
   ```
 

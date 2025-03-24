@@ -59,9 +59,9 @@ std::bitset<N> bits;  // N 是编译时确定的位数，如 std::bitset<8>
   ```
 - **判断状态**：
   ```cpp
-  bool has_one = b.any();  // 是否有至少一个 1？
+  bool has_one  = b.any();  // 是否有至少一个 1？
   bool all_zero = b.none();// 是否全为 0？
-  bool all_one = b.all();  // 是否全为 1？
+  bool all_one  = b.all();  // 是否全为 1？
   ```
 - **获取位数**：
   ```cpp
@@ -73,7 +73,7 @@ std::bitset<N> bits;  // N 是编译时确定的位数，如 std::bitset<8>
 #### **5. 转换与输出**
 - **转换为整数**：
   ```cpp
-  unsigned long ul = b.to_ulong();
+  unsigned long ul       = b.to_ulong();
   unsigned long long ull = b.to_ullong();
   ```
   - 若位数超过目标类型，抛出 `std::overflow_error`。
