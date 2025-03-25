@@ -35,9 +35,6 @@ int main() {
     // 正确：直接使用参数构造 Foo，无需创建临时对象
     std::optional<Foo> opt1{std::in_place, 1, 2};
 
-    // 错误：Foo 的构造函数需要两个参数，无法隐式转换
-    // std::optional<Foo> opt2{1, 2};
-
     // 正确：就地构造 vector，包含 10 个 42
     std::optional<std::vector<int>> opt3{std::in_place, 10, 42};
 }

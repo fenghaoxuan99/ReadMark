@@ -8,10 +8,10 @@
 
 
 
-#### std::basic_ios<CharT,Traits>::good   如果流上最近的 I/O 操作成功完成，则返回 true
-#### std::basic_ios<CharT,Traits>::eof    如果关联的流已到达文件末尾，则返回 true
-#### std::basic_ios<CharT,Traits>::fail   如果关联的流上发生错误，则返回 true
-#### std::basic_ios<CharT,Traits>::bad    如果关联的流上发生了不可恢复的错误，则返回 true
+#### std::basic_ios<CharT,Traits>::good()   如果流上最近的 I/O 操作成功完成，则返回 true
+#### std::basic_ios<CharT,Traits>::eof()    如果关联的流已到达文件末尾，则返回 true
+#### std::basic_ios<CharT,Traits>::fail()   如果关联的流上发生错误，则返回 true
+#### std::basic_ios<CharT,Traits>::bad()    如果关联的流上发生了不可恢复的错误，则返回 true
 ```cpp
 bool good() const;
 bool eof()  const;
@@ -82,10 +82,10 @@ iostate rdstate() const;
 当前流错误状态。它是一个位掩码类型，可以是以下常量的组合
 
 常量	解释
-- goodbit	无错误
-- badbit	不可恢复的流错误
-- failbit	输入/输出操作失败（格式化或提取错误）
-- eofbit	关联的输入序列已到达文件末尾
+- **goodbit**	无错误
+- **badbit**	不可恢复的流错误
+- **failbit**	输入/输出操作失败（格式化或提取错误）
+- **eofbit**	关联的输入序列已到达文件末尾
 
 ```cpp
 #include <iostream>
@@ -104,6 +104,7 @@ int main()
         std::cout << "stream state is eofbit\n";
 }
 ```
+
 ## std::basic_ios<CharT,Traits>::setstate
 ```cpp
 void setstate( iostate state );
@@ -112,10 +113,10 @@ void setstate( iostate state );
 参数
 state	-	要设置的流错误状态标志。它可以是以下常量的组合
 常量	解释
-goodbit	无错误
-badbit	不可恢复的流错误
-failbit	输入/输出操作失败（格式化或提取错误）
-eofbit	关联的输入序列已到达文件末尾
+- **goodbit**	无错误
+- **badbit**	不可恢复的流错误
+- **failbit**	输入/输出操作失败（格式化或提取错误）
+- **eofbit**	关联的输入序列已到达文件末尾
 ```cpp
 #include <iostream>
 #include <sstream>
@@ -195,10 +196,13 @@ int main()
     std::cout << "local content: " << local.str() << "\n";
 }
 ```
-##### 重定向流的输入/输出目标
-临时修改流（如 std::cout）的缓冲区，将输出重定向到文件或字符串流等。
 
+
+##### 重定向流的输入/输出目标
+
+临时修改流（如 std::cout）的缓冲区，将输出重定向到文件或字符串流等。
 示例：将 std::cout 输出重定向到文件
+
 ```cpp
 #include <iostream>
 #include <fstream>
