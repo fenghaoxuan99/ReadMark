@@ -2,7 +2,7 @@
 
 
 # basic_istream
-
+![alt text](../Image/stream.png)
 
 #### std::cin, std::wcin
 ```cpp

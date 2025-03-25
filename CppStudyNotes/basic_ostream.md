@@ -1,5 +1,10 @@
-
+![alt text](../Image/stream.png)
 ![alt text](../Image/isobase.png)
+
+## std::cout, std::wcout
+## std::cerr, std::wcerr
+## std::clog, std::wclog
+
 
 ## std::basic_ostream<CharT,Traits>::write
 

@@ -1,7 +1,7 @@
 
 
 # std::basic_ios
-
+![alt text](../Image/stream.png)
 ![alt text](../Image/basic_ios.png)
 
 
