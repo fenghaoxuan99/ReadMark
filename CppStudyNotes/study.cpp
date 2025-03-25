@@ -1,33 +1,29 @@
 #include <iostream>
+#include <sstream>
 
 int main()
 {
-    const int num = 150;
+    std::stringstream s1("Hello, world"); // IO stream
+    s1.get();
+    if (s1.putback('Y')) // modifies the buffer
+        std::cout << s1.rdbuf() << '\n';
+    else
+        std::cout << "putback failed\n";
 
-    // using fmtflags as class member constants:
-    std::cout.setf(std::ios_base::hex, std::ios_base::basefield);
-    std::cout.setf(std::ios_base::showbase);
-    std::cout << num << '\n';
+    std::cout << "--\n";
 
-    // using fmtflags as inherited class member constants:
-    std::cout.setf(std::ios::hex, std::ios::basefield);
-    std::cout.setf(std::ios::showbase);
-    std::cout << num << '\n';
+    std::istringstream s2("Hello, world"); // input-only stream
+    s2.get();
+    if (s2.putback('Y')) // cannot modify input-only buffer
+        std::cout << s2.rdbuf() << '\n';
+    else
+        std::cout << "putback failed\n";
+    s2.clear();
 
-    // using fmtflags as object member constants:
-    std::cout.setf(std::cout.hex, std::cout.basefield);
-    std::cout.setf(std::cout.showbase);
-    std::cout << num << '\n';
+    std::cout << "--\n";
 
-    // using fmtflags as a type:
-    std::ios_base::fmtflags ff;
-    ff  = std::cout.flags();
-    ff &= ~std::cout.basefield; // unset basefield bits
-    ff |= std::cout.hex;        // set hex
-    ff |= std::cout.showbase;   // set showbase
-    std::cout.flags(ff);
-    std::cout << num << '\n';
-
-    // not using fmtflags, but using manipulators:
-    std::cout << std::hex << std::showbase << num << '\n';
+    if (s2.putback('H')) // non-modifying putback
+        std::cout << s2.rdbuf() << '\n';
+    else
+        std::cout << "putback failed\n";
 }
