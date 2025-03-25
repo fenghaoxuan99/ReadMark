@@ -1,12 +1,33 @@
-    #include <iostream>
-    #include <bitset>
+#include <iostream>
 
-    int main()
-    {
-        std::bitset<4> b("1010");                  // 二进制 1010 → 十进制 10
-        b.set(0);                                  // 变为 1011（11）
-        b.flip(2);                                 // 变为 1111（15）
-        std::cout << "Bitset: " << b << "\n";      // 输出 1111
-        std::cout << "Count: " << b.all() << "\n"; // 4
-        return 0;
-    }
+int main()
+{
+    const int num = 150;
+
+    // using fmtflags as class member constants:
+    std::cout.setf(std::ios_base::hex, std::ios_base::basefield);
+    std::cout.setf(std::ios_base::showbase);
+    std::cout << num << '\n';
+
+    // using fmtflags as inherited class member constants:
+    std::cout.setf(std::ios::hex, std::ios::basefield);
+    std::cout.setf(std::ios::showbase);
+    std::cout << num << '\n';
+
+    // using fmtflags as object member constants:
+    std::cout.setf(std::cout.hex, std::cout.basefield);
+    std::cout.setf(std::cout.showbase);
+    std::cout << num << '\n';
+
+    // using fmtflags as a type:
+    std::ios_base::fmtflags ff;
+    ff  = std::cout.flags();
+    ff &= ~std::cout.basefield; // unset basefield bits
+    ff |= std::cout.hex;        // set hex
+    ff |= std::cout.showbase;   // set showbase
+    std::cout.flags(ff);
+    std::cout << num << '\n';
+
+    // not using fmtflags, but using manipulators:
+    std::cout << std::hex << std::showbase << num << '\n';
+}
