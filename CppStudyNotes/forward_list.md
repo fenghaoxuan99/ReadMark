@@ -8,7 +8,8 @@ template<
 
 > class forward_list;
 ```
-std::forward_list 是一个容器，支持在容器中任何位置快速插入和移除元素。不支持快速随机访问。它被实现为单向链表。与 std::list 相比，当不需要双向迭代时，此容器提供更节省空间的存储。
+std::forward_list 是一个容器，支持在容器中任何位置快速插入和移除元素。
+不支持快速随机访问。它被实现为单向链表。与 std::list 相比，当不需要双向迭代时，此容器提供更节省空间的存储。
 
 #### std::forward_list<T,Allocator>::insert_after
 ```cpp
