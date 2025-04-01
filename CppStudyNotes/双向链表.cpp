@@ -15,23 +15,16 @@ public:
     DoubeleList()
     {
         head = new node;
-        head->next = head;
-        head->prev = head;
     }
     ~DoubeleList()
     {
         node *p = head->next;
-        while (p != head)
+        while (p != nullptr)
         {
             node *q = p->next;
-            if (q != nullptr)
-            {
-                q->prev = head;
-            }
             delete p;
             p = q;
         }
-        delete head;
         head = nullptr;
     }
 
@@ -41,32 +34,44 @@ public:
         node *p = new node(a);
         p->next = head->next;
         head->next = p;
-        head->next->prev = p;
+        if (p->next != nullptr)
+        {
+            p->next->prev = p;
+        }
         p->prev = head;
     }
+
     void inserttail(int a)
     {
         node *p = new node(a);
-        node *q = head->prev;
+        node *q = head;
+        while (q->next != nullptr)
+        {
+            q = q->next;
+        }
         q->next = p;
         p->prev = q;
-        p->next = head;
-        head->prev = p;
     }
     void erase(int a)
     {
+        node *q = head;
         node *p = head->next;
-        while (p != head)
+        while (p != nullptr)
         {
             if (p->data == a)
             {
-                p->prev->next = p->next;
-                p->next->prev = p->prev;
+                q->next = p->next;
+                if (p->next != nullptr)
+                {
+                    p->next->prev = q;
+                }
                 delete p;
+
                 return;
             }
             else
             {
+                q = p;
                 p = p->next;
             }
         }
@@ -75,7 +80,7 @@ public:
     void show()
     {
         node *p = head->next;
-        while (p != head)
+        while (p != nullptr)
         {
             std::cout << p->data << " ";
             p = p->next;
@@ -90,14 +95,16 @@ private:
 int main()
 {
     DoubeleList l;
-    for (int i = 0; i < 10; i++)
-    {
-        l.inserttail(i);
-    }
+    l.inserttail(1);
+    l.inserttail(2);
+    l.inserttail(3);
+    l.inserttail(4);
+    l.inserttail(5);
 
-    l.erase(0);
+    l.erase(5);
 
     l.show();
+
     std::cout << "---------E-N-D---------" << std::endl;
     return 0;
 }
