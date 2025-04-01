@@ -64,6 +64,9 @@
         "thread": "cpp",
         "cstring": "cpp",
         "forward_list": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "condition_variable": "cpp",
+        "mutex": "cpp",
+        "map": "cpp"
     }
 }

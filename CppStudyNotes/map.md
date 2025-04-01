@@ -14,7 +14,8 @@ template<
 
 > class map;
 ```
-std::map 是一个 **已排序的关联容器，** 含有键-值对，其中键是唯一的。键通过使用比较函数 Compare 排序。搜索、移除和插入操作具有对数复杂度。Map 通常实现为 红黑树。
+std::map 是一个 **已排序的关联容器，** 含有键-值对，其中键是唯一的。键通过使用比较函数 Compare 排序。搜索、移除和插入操作具有对数复杂度。
+**Map 通常实现为 红黑树。**
 
 std::map 的迭代器以键的升序迭代，其中升序是由构造时使用的比较定义的。
 
@@ -22,7 +23,7 @@ std::map 的迭代器以键的升序迭代，其中升序是由构造时使用�
 - unordered_map: unordered_map内部实现了一个哈希表（也叫散列表，通过把关键码值映射到Hash表中一个位置来访问记录，查找的时间复杂度可达到O(1)因此，其元素的排列顺序是无序的。
 
 
-!!!bote：
+!!!note：
 **value_type	std::pair<const Key, T>**
 
 ```cpp
@@ -62,9 +63,9 @@ iterator insert_or_assign( const_iterator hint, Key&& k, M&& obj );
 ```
 
 
-k	-	用于查找和插入（如果未找到）的键
-hint	-	指示新元素将要插入位置之前的迭代器
-obj	-	要插入或赋值的值
+k	  -	用于查找和插入（如果未找到）的键
+hint  -	指示新元素将要插入位置之前的迭代器
+obj	  -	要插入或赋值的值
 ```cpp
 #include <iostream>
 #include <string>
