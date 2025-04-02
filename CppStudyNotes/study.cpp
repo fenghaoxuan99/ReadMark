@@ -4,89 +4,33 @@
 #include <stack>
 using namespace std;
 
-class Queue
+// 实现希尔排序算法
+void ShellSort(vector<int> &nums)
 {
-public:
-    Queue(int size) : arr(new int[size]), front(0), rear(0), size(size) {};
-    ~Queue() { delete[] arr; }
-    void push(int value)
+    int n = nums.size();
+    for (int gap = n / 2; gap > 0; gap /= 2)
     {
-        if ((rear + 1) % size == front)
+        for (int i = gap; i < n; i++)
         {
-            expand(size * 2);
+            int key = nums[i];
+            int j = i - gap;
+            while (j >= 0 && nums[j] > key)
+            {
+                swap(nums[j], nums[j + gap]);
+                j -= gap;
+            }
         }
-        arr[rear] = value;
-        rear = (rear + 1) % size;
     }
-
-    int pop()
-    {
-        if (isEmpty())
-        {
-            return -1;
-        }
-        int top = arr[front];
-        front = (front + 1) % size;
-        return top;
-    }
-
-    int top() const { return arr[front]; }
-
-    int back() const { return arr[(rear - 1 + size) % size]; }
-
-    int getFront() { return arr[front]; }
-
-    void expand(int newSize)
-    {
-        int *newArr = new int[newSize];
-        int index = 0;
-        for (int i = front; i != rear; i = (i + 1) % size)
-        {
-            newArr[index++] = arr[i];
-        }
-        delete[] arr;
-        arr = newArr;
-        front = 0;
-        rear = index;
-        size = newSize;
-    }
-
-    bool isEmpty() { return front == rear ; }
-
-    bool isFull() { return (rear + 1) % size == front; }
-
-    void show()
-    {
-        for (int i = front; i != rear; i = (i + 1) % size)
-        {
-            cout << arr[i] << " ";
-        }
-        cout << endl;
-    }
-
-private:
-    int *arr;
-    int front;
-    int rear;
-    int size;
-};
+}
 
 int main()
 {
-    Queue q(5);
-    q.push(1);
-    q.push(2);
-    q.push(3);
-    q.push(4);
-    q.push(5);
+    vector<int> nums = {1, 2, 3, 56, 5, 6, 7, 8, 99};
+    ShellSort(nums);
+    for (int i = 0; i < nums.size(); i++)
+    {
+        cout << nums[i] << " ";
+    }
 
-    q.show();
-
-    std::cout << "Top element: " << q.top() << std::endl;
-    std::cout << "Back element: " << q.back() << std::endl;
-
-    q.pop();
-
-    q.show();
     return 0;
 }
