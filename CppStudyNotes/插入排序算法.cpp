@@ -26,6 +26,7 @@ int main()
     vector<int> nums = {1, 2, 3, 56, 5, 6, 7, 8, 99};
     InsertSort(nums);
     for (int i = 0; i < nums.size(); i++)
+    
 
         return 0;
 }
