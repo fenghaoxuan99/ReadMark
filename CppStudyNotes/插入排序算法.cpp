@@ -14,7 +14,6 @@ void InsertSort(vector<int> &nums)
         int j = i - 1;
         while (j >= 0 && nums[j] > key)
         {
-
             swap(nums[j], nums[j + 1]);
             j--;
         }
@@ -26,7 +25,6 @@ int main()
     vector<int> nums = {1, 2, 3, 56, 5, 6, 7, 8, 99};
     InsertSort(nums);
     for (int i = 0; i < nums.size(); i++)
-    
 
         return 0;
 }
