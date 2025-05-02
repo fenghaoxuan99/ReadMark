@@ -1,33 +1,15 @@
 #include <iostream>
 using namespace std;
 
-class Base
-{
-public:
-    virtual void fun()
-    {
-        cout << "base :: fun()" << endl;
-    }
-};
-
-class Son : public Base
-{
-public:
-    virtual void fun()
-    {
-        cout << "son :: fun()" << endl;
-    }
-    void func()
-    {
-        cout << "son :: not virtual function" << endl;
-    }
-};
-
 int main()
 {
-    Son s;
-    Base &b = s; // 基类类型引用绑定已经存在的Son对象，引用必须初始化
-    s.fun();     // son::fun()
-    b.fun();     // son :: fun()
+    int x = 10;
+    int &ref1 = x; // 正确：绑定到非常量左值
+
+    const int y = 20;
+    int &ref2 = y; // 错误：不能绑定到常量左值
+
+    int &ref3 = 30;    // 错误：不能绑定到右值
+    int &ref4 = x + 1; // 错误：不能绑定到临时对象(右值)
     return 0;
 }
